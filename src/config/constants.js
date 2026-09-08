@@ -17,7 +17,7 @@ export const CUSTOM_HERO_IMAGE = "";
 
 export const EVENT_DETAILS = {
   name: "ConnectiFY'26",
-  tagline: "Start Your Journey Towards Entrepreneurship",
+  tagline: "This is where your voyage begins",
   heroHeadline: "Your First Step Into Entrepreneurship Starts Here.",
   subtext: "An exclusive induction for newly admitted students to begin their entrepreneurial journey, connect with bold ideas, visionary peers, and transformative opportunities.",
   date: "22nd September, 2026",

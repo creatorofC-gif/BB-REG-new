@@ -6,7 +6,7 @@ A production-ready, mobile-first and desktop-responsive event registration websi
 
 ## 🏛️ Event Details
 - **Event**: ConnectiFY'26
-- **Tagline**: *"Start Your Journey Towards Entrepreneurship"*
+- **Tagline**: *"This is where your voyage begins"*
 - **Date**: 22nd September, 2026
 - **Time**: 4:00 PM onwards
 - **Venue**: Room B-113, K. J. Somaiya College of Engineering, Vidyavihar

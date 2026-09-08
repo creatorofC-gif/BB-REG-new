@@ -138,9 +138,9 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
         <div className="tear-notch-right" />
 
         {/* Small Perforation Label in Center */}
-        <div className="absolute bg-[#F7F1E1] px-3 py-0.5 border border-[#8B2616]/30 text-[10px] uppercase font-mono tracking-widest text-[#7B1F13] flex items-center gap-1.5 shadow-sm">
-          <Scissors className="w-3 h-3 rotate-90" />
-          <span>PERFORATION LINE • TEAR ALONG EDGE</span>
+        <div className="absolute bg-[#F7F1E1] px-2 sm:px-3 py-0.5 border border-[#8B2616]/30 text-[9px] sm:text-[10px] uppercase font-mono tracking-wider text-[#7B1F13] flex items-center gap-1 sm:gap-1.5 shadow-sm max-w-[90%] truncate">
+          <Scissors className="w-3 h-3 rotate-90 shrink-0" />
+          <span className="truncate">PERFORATION LINE • TEAR ALONG EDGE</span>
         </div>
       </div>
 
@@ -181,16 +181,16 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
             <span className="w-8 h-1 bg-[#8B2616]/30 rounded-full" />
           </div>
 
-          <div className="flex items-center justify-center gap-2 mt-1">
-            <ArrowRight className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-pulse"}`} />
-            <span className="font-cinzel text-xs sm:text-sm font-bold tracking-widest text-[#2C160B]">
+          <div className="flex items-center justify-center gap-2 mt-1 max-w-full">
+            <ArrowRight className={`w-4 h-4 text-[#8B2616] shrink-0 ${isDragging ? "scale-125" : "animate-pulse"}`} />
+            <span className="font-cinzel text-[11px] sm:text-sm font-bold tracking-wider sm:tracking-widest text-[#2C160B] max-w-full leading-tight">
               {isDragging 
                 ? `TEARING... ${tearPercentage}%` 
                 : isSubmitting 
                   ? "PROCESSING CHEQUE..." 
                   : "PULL RIGHT TO TEAR CHEQUE"}
             </span>
-            <ArrowRight className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-pulse"}`} />
+            <ArrowRight className={`w-4 h-4 text-[#8B2616] shrink-0 ${isDragging ? "scale-125" : "animate-pulse"}`} />
           </div>
 
           {/* Progress bar indication when dragging or holding key */}

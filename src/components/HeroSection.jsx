@@ -55,9 +55,9 @@ export function HeroSection({ onRegisterClick }) {
         </ScrollReveal>
         <ScrollReveal delay={490}>
           <a href="#registration-cheque" onClick={handleCtaClick} className="btn-vintage hero-cta">
-          <Navigation className="w-5 h-5 rotate-45" aria-hidden="true" />
-          <span>Begin your journey — register now</span>
-          <ArrowDown className="w-5 h-5" aria-hidden="true" />
+            <Navigation className="w-5 h-5 rotate-45 shrink-0" aria-hidden="true" />
+            <span>Begin your journey — register now</span>
+            <ArrowDown className="w-5 h-5 shrink-0" aria-hidden="true" />
           </a>
         </ScrollReveal>
       </div>

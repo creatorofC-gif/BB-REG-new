@@ -202,12 +202,6 @@ export function SuccessReceipt({ registrationData, onReset }) {
             >
               Register Another Student →
             </button>
-          </div>
-
-          {/* Footer MICR */}
-          <div className="micr-line text-center pt-8 pb-1 text-xs sm:text-sm tracking-[0.25em] text-[#5C4736]/75">
-            ⑈ 220926 ⑈ CONFIRMED ⑈ CCF-2026 ⑈ 26
-          </div>
         </div>
 
         <GreekBorder className="mt-12 sm:mt-16 opacity-85 max-w-2xl" />
