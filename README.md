@@ -36,7 +36,7 @@ A production-ready, mobile-first and desktop-responsive event registration websi
 4. **Official Stamped Confirmation**:
    - Post-tear wax seal / "OFFICIALLY ADMITTED" stamp animation.
    - Admitted explorer voyage receipt with event logistics.
-   - "Add to Google Calendar" 1-click shortcut.
+   - Confirmation email sent to the submitted Somaiya email address.
    - Printable / saveable pass button.
    - Gold & terracotta confetti burst.
 
@@ -72,7 +72,7 @@ In `src/config/constants.js`:
    ```javascript
    export const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycb.../exec";
    ```
-8. Save and deploy! When students submit, their data is instantly validated and appended to your Google Sheet.
+8. Save and deploy! When students submit, their data is validated, appended to your Google Sheet, and a confirmation email is sent to their submitted address. The first deployment after this update will ask you to authorize Gmail sending.
 
 ---
 

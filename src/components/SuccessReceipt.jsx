@@ -5,7 +5,7 @@ import {
   Clock, 
   MapPin, 
   Compass,
-  ExternalLink
+  Mail
 } from "lucide-react";
 import GreekBorder from "./GreekBorder";
 
@@ -42,17 +42,6 @@ export function SuccessReceipt({ registrationData, onReset }) {
   }, []);
 
   const { fullName, email, contact, year, branch } = registrationData || {};
-
-  // Google Calendar URL generator
-  const getGoogleCalendarUrl = () => {
-    const title = encodeURIComponent("ConnectiFY'26 - BloomBox Entrepreneurship Induction");
-    const details = encodeURIComponent(
-      `ConnectiFY'26 Official Event\nVenue: Room B-113, K. J. Somaiya College of Engineering\nOrganizer: BloomBox E-Cell\nAdmitted: ${fullName} (${email})\nBranch: ${branch}`
-    );
-    const location = encodeURIComponent("Room B-113, K. J. Somaiya College of Engineering, Vidyavihar, Mumbai");
-    const dates = "20260922T103000Z/20260922T133000Z";
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
-  };
 
   return (
     <section className="section-cheque relative flex flex-col items-center justify-center z-20">
@@ -166,19 +155,11 @@ export function SuccessReceipt({ registrationData, onReset }) {
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Confirmation and next action */}
           <div className="success-actions flex flex-wrap items-center justify-between gap-4 pt-8 border-t-2 border-[#8B2616]/30">
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href={getGoogleCalendarUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-vintage rounded-xl text-xs sm:text-sm md:text-base px-6 sm:px-8 py-3.5 sm:py-4 flex items-center gap-2.5 shadow-lg whitespace-nowrap"
-              >
-                <Calendar className="w-5 h-5 text-[#FFE8A3] shrink-0" />
-                <span>ADD TO GOOGLE CALENDAR</span>
-                <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
-              </a>
+            <div className="flex items-center gap-3 text-sm sm:text-base text-[#5C4736]">
+              <Mail className="w-5 h-5 text-[#8B2616] shrink-0" />
+              <span>A confirmation has been sent to <strong>{email}</strong>.</span>
             </div>
 
             <button

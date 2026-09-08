@@ -8,7 +8,7 @@
  * 1. Open Google Sheets (https://sheets.new) and create a new spreadsheet.
  * 2. Rename the sheet tab to "Registrations" (or leave as "Sheet1").
  * 3. (Optional) Set the first row header:
- *    [Timestamp, Event, Full Name, Somaiya Email, Contact Number, Year of Study, Branch, Status]
+ *    [Timestamp, Event, Full Name, Somaiya Email, Contact Number, Year of Study, Branch, Status, Confirmation Email]
  * 4. In the spreadsheet menu, go to: Extensions > Apps Script
  * 5. Replace all code in the Apps Script editor with THIS file content.
  * 6. (Optional) If you want to specify a specific Sheet ID, set SPREADSHEET_ID below.
@@ -108,9 +108,13 @@ function doPost(e) {
         "Contact Number",
         "Year of Study",
         "Branch",
-        "Submission Status"
+        "Submission Status",
+        "Confirmation Email"
       ]);
-      sheet.getRange("A1:H1").setFontWeight("bold").setBackground("#DFCBA0");
+      sheet.getRange("A1:I1").setFontWeight("bold").setBackground("#DFCBA0");
+    } else if (sheet.getLastColumn() < 9) {
+      // Add this column automatically for sheets created with an older script version.
+      sheet.getRange(1, 9).setValue("Confirmation Email").setFontWeight("bold").setBackground("#DFCBA0");
     }
 
     // Check for duplicate Somaiya Email (prevent double registration)
@@ -121,10 +125,28 @@ function doPost(e) {
     });
 
     if (emailExists) {
+      const existingRowIndex = existingData.slice(1).findIndex(function(row) {
+        return (row[3] || "").toString().toLowerCase() === email;
+      });
+      const existingRow = existingData[existingRowIndex + 1];
+
+      // Re-send the pass for an existing registration, rather than creating a duplicate.
+      sendConfirmationEmail({
+        fullName: existingRow[2],
+        email: email,
+        contact: existingRow[4],
+        year: existingRow[5],
+        branch: existingRow[6],
+        eventName: existingRow[1] || eventName
+      });
+      sheet.getRange(existingRowIndex + 2, 9).setValue(
+        "RESENT - " + Utilities.formatDate(new Date(), "Asia/Kolkata", "yyyy-MM-dd HH:mm:ss")
+      );
+
       return createJsonResponse({
         status: "success",
         isDuplicate: true,
-        message: "You are already registered for ConnectiFY'26! We have your booking on record."
+        message: "You are already registered for ConnectiFY'26. Your confirmation email has been sent again."
       }, 200);
     }
 
@@ -143,8 +165,19 @@ function doPost(e) {
       "'" + contact, // Prepended with apostrophe to preserve leading zero formatting
       year,
       branch,
-      "CONFIRMED"
+      "CONFIRMED",
+      "PENDING"
     ]);
+
+    const insertedRow = sheet.getLastRow();
+    try {
+      sendConfirmationEmail({ fullName, email, contact, year, branch, eventName });
+      sheet.getRange(insertedRow, 9).setValue("SENT - " + formattedTimestamp);
+    } catch (mailError) {
+      sheet.getRange(insertedRow, 9).setValue("FAILED - " + mailError.toString());
+      console.error("Confirmation email failed for " + email + ": " + mailError);
+      throw new Error("Registration was saved, but the confirmation email could not be sent. Please contact the event team.");
+    }
 
     return createJsonResponse({
       status: "success",
@@ -164,6 +197,54 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function sendConfirmationEmail(registration) {
+  const subject = "Registration confirmed: " + registration.eventName;
+  const plainBody =
+    "Hi " + registration.fullName + ",\n\n" +
+    "Your registration for " + registration.eventName + " has been confirmed.\n\n" +
+    "Event details\n" +
+    "Date: 22 September 2026\n" +
+    "Time: 4:00 PM onwards\n" +
+    "Venue: Room B-113, K. J. Somaiya College of Engineering, Vidyavihar\n\n" +
+    "Registration details\n" +
+    "Email: " + registration.email + "\n" +
+    "Year: " + registration.year + "\n" +
+    "Branch: " + registration.branch + "\n\n" +
+    "We look forward to seeing you there!\n\n" +
+    "BloomBox — The Entrepreneurship Cell of KJSCE";
+
+  const htmlBody =
+    "<p>Hi " + escapeHtml(registration.fullName) + ",</p>" +
+    "<p>Your registration for <strong>" + escapeHtml(registration.eventName) + "</strong> has been confirmed.</p>" +
+    "<h3>Event details</h3>" +
+    "<p><strong>Date:</strong> 22 September 2026<br>" +
+    "<strong>Time:</strong> 4:00 PM onwards<br>" +
+    "<strong>Venue:</strong> Room B-113, K. J. Somaiya College of Engineering, Vidyavihar</p>" +
+    "<h3>Registration details</h3>" +
+    "<p><strong>Email:</strong> " + escapeHtml(registration.email) + "<br>" +
+    "<strong>Year:</strong> " + escapeHtml(registration.year) + "<br>" +
+    "<strong>Branch:</strong> " + escapeHtml(registration.branch) + "</p>" +
+    "<p>We look forward to seeing you there!</p>" +
+    "<p>BloomBox &mdash; The Entrepreneurship Cell of KJSCE</p>";
+
+  MailApp.sendEmail({
+    to: registration.email,
+    subject: subject,
+    body: plainBody,
+    htmlBody: htmlBody,
+    name: "BloomBox E-Cell"
+  });
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function doGet(e) {
