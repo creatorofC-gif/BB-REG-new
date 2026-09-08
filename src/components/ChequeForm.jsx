@@ -165,7 +165,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           }`}
         >
           {/* Top Cheque Header */}
-          <div className="flex flex-wrap items-center justify-between gap-5 pb-8 border-b-2 border-[#8B2616]/30">
+          <div className="cheque-header-line flex flex-wrap items-center justify-between gap-5 border-b-2 border-[#8B2616]/30">
             
             {/* Bank Emblem & Branding */}
             <div className="flex items-center gap-4 sm:gap-6">
@@ -183,9 +183,9 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
             </div>
 
             {/* Vintage Boxed Date */}
-            <div className="flex flex-col items-end gap-2.5 ml-auto">
+            <div className="cheque-date-container flex flex-col items-start sm:items-end gap-2.5 sm:ml-auto">
               {/* Live date boxes (DD / MM / YYYY) */}
-              <div className="flex items-center gap-1.5 mt-1">
+              <div className="flex items-center gap-1 sm:gap-1.5 mt-1">
                 <span className="text-xs font-mono font-bold text-[#5C4736] mr-1">DATE:</span>
                 <span className="date-box">{dateDigits[0][0]}</span>
                 <span className="date-box">{dateDigits[0][1]}</span>
@@ -201,11 +201,11 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           </div>
 
           {/* CHEQUE FORM FIELDS */}
-          <form onSubmit={(e) => e.preventDefault()} className="mt-8 sm:mt-10 space-y-7 sm:space-y-9 mb-4" noValidate>
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-7 sm:space-y-9 mb-4" noValidate>
             
             {/* FIELD 1: FULL NAME */}
-            <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <div className="cheque-field-first relative">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4">
                 <label 
                   htmlFor="fullName" 
                   className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
