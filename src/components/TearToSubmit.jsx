@@ -182,15 +182,19 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
           </div>
 
           <div className="flex items-center justify-center gap-2 mt-1 max-w-full">
-            <ArrowRight className={`w-4 h-4 text-[#8B2616] shrink-0 ${isDragging ? "scale-125" : "animate-pulse"}`} />
-            <span className="font-cinzel text-[11px] sm:text-sm font-bold tracking-wider sm:tracking-widest text-[#2C160B] max-w-full leading-tight">
+            <span className="font-cinzel text-xs sm:text-sm font-bold tracking-widest text-[#2C160B] max-w-full leading-tight">
               {isDragging 
                 ? `TEARING... ${tearPercentage}%` 
                 : isSubmitting 
                   ? "PROCESSING CHEQUE..." 
-                  : "PULL RIGHT TO TEAR CHEQUE"}
+                  : "SWIPE RIGHT"}
             </span>
-            <ArrowRight className={`w-4 h-4 text-[#8B2616] shrink-0 ${isDragging ? "scale-125" : "animate-pulse"}`} />
+            {!isDragging && !isSubmitting && (
+              <div className="flex items-center gap-0.5 text-[#8B2616] shrink-0">
+                <ArrowRight className="w-4 h-4 animate-arrow-slide" />
+                <ArrowRight className="w-4 h-4 animate-arrow-slide" style={{ animationDelay: "0.2s" }} />
+              </div>
+            )}
           </div>
 
           {/* Progress bar indication when dragging or holding key */}

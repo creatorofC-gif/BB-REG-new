@@ -71,7 +71,7 @@ export function EventStoryline() {
               <div>
                 {/* Step badge */}
                 <div className="flex items-center justify-between mb-3.5">
-                  <span className="font-mono text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded bg-[#8B2616]/75 text-[#F8F3E6] border border-[#CBA344]/40 shrink-0">
+                  <span className="step-badge font-mono shrink-0">
                     STEP {wp.step}
                   </span>
                   <div className="p-1.5 rounded-full bg-[#140C07] border border-[#CBA344]/40 group-hover:scale-110 transition-transform shadow-inner shrink-0">

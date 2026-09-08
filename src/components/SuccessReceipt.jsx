@@ -5,8 +5,7 @@ import {
   Clock, 
   MapPin, 
   Compass,
-  ExternalLink,
-  Printer
+  ExternalLink
 } from "lucide-react";
 import GreekBorder from "./GreekBorder";
 
@@ -53,12 +52,6 @@ export function SuccessReceipt({ registrationData, onReset }) {
     const location = encodeURIComponent("Room B-113, K. J. Somaiya College of Engineering, Vidyavihar, Mumbai");
     const dates = "20260922T103000Z/20260922T133000Z";
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
-  };
-
-  const handlePrint = () => {
-    if (typeof window !== "undefined") {
-      window.print();
-    }
   };
 
   return (
@@ -186,14 +179,6 @@ export function SuccessReceipt({ registrationData, onReset }) {
                 <span>ADD TO GOOGLE CALENDAR</span>
                 <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
               </a>
-
-              <button
-                onClick={handlePrint}
-                className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-[#8B2616]/40 bg-[#EBDDBE] text-[#2C160B] hover:bg-[#DFC99E] font-cinzel font-bold text-xs sm:text-sm tracking-wider flex items-center gap-2.5 transition-colors shadow-sm cursor-pointer whitespace-nowrap shrink-0"
-              >
-                <Printer className="w-4 h-4 text-[#7B1F13] shrink-0" />
-                <span>PRINT / SAVE PASS</span>
-              </button>
             </div>
 
             <button

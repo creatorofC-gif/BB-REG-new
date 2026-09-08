@@ -119,7 +119,9 @@ export function HeroSection({ onRegisterClick }) {
             <span>NNECTIFY</span><sup>'26</sup>
           </h1>
         </ScrollReveal>
-        <ScrollReveal delay={250}><p className="hero-tagline">{EVENT_DETAILS.tagline}</p></ScrollReveal>
+        <ScrollReveal delay={250} className="text-center flex flex-col items-center w-full">
+          <p className="hero-tagline text-center mx-auto">{EVENT_DETAILS.tagline}</p>
+        </ScrollReveal>
         <ScrollReveal delay={330} className="hero-introduction">
           <h2>{EVENT_DETAILS.heroHeadline}</h2>
           <p>{EVENT_DETAILS.subtext}</p>
