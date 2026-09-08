@@ -467,9 +467,9 @@ body::after {
 }
 
 @keyframes tearSeparate {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  40% { transform: translateY(22px) rotate(1.5deg); opacity: 0.95; }
-  100% { transform: translateY(90px) rotate(4deg); opacity: 0; }
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  40% { transform: translateX(22px) rotate(0.5deg); opacity: 0.95; }
+  100% { transform: translateX(90px) rotate(1.5deg); opacity: 0; }
 }
 
 .animate-torn-away {

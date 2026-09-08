@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { 
   CheckCircle2, 
   AlertCircle, 
@@ -22,6 +22,20 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [shakeError, setShakeError] = useState(false);
+  const [currentDate, setCurrentDate] = useState(() => new Date());
+
+  // Keep the cheque date current, including if the page remains open overnight.
+  useEffect(() => {
+    const updateDate = () => setCurrentDate(new Date());
+    const intervalId = window.setInterval(updateDate, 60_000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  const dateDigits = [
+    String(currentDate.getDate()).padStart(2, "0"),
+    String(currentDate.getMonth() + 1).padStart(2, "0"),
+    String(currentDate.getFullYear())
+  ];
 
   // Field refs for auto-focus on error
   const nameRef = useRef(null);
@@ -156,11 +170,8 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                 <Compass className="w-8 h-8 sm:w-11 sm:h-11 animate-compass" />
               </div>
               <div>
-                <div className="text-xs sm:text-sm font-cinzel font-bold text-[#8B2616] tracking-widest uppercase">
-                  CONNECTIFY EXPEDITION BANK
-                </div>
                 <div className="text-xl sm:text-3xl font-cinzel font-black tracking-wide text-[#2C160B]">
-                  REGISTRATION CHEQUE LEAF
+                  REGISTER NOW
                 </div>
                 <div className="text-xs text-[#5C4736] font-mono mt-1">
                   BRANCH: KJSCE • ROOM B-113 • MUMBAI
@@ -174,19 +185,18 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                 No. CCF-2026-0922
               </div>
 
-              {/* Date Boxes (22 / 09 / 2026) */}
+              {/* Live date boxes (DD / MM / YYYY) */}
               <div className="flex items-center gap-1.5 mt-1">
                 <span className="text-xs font-mono font-bold text-[#5C4736] mr-1">DATE:</span>
-                <span className="date-box">2</span>
-                <span className="date-box">2</span>
+                <span className="date-box">{dateDigits[0][0]}</span>
+                <span className="date-box">{dateDigits[0][1]}</span>
                 <span className="text-sm font-bold text-[#5C4736]">/</span>
-                <span className="date-box">0</span>
-                <span className="date-box">9</span>
+                <span className="date-box">{dateDigits[1][0]}</span>
+                <span className="date-box">{dateDigits[1][1]}</span>
                 <span className="text-sm font-bold text-[#5C4736]">/</span>
-                <span className="date-box">2</span>
-                <span className="date-box">0</span>
-                <span className="date-box">2</span>
-                <span className="date-box">6</span>
+                {dateDigits[2].split("").map((digit, index) => (
+                  <span className="date-box" key={index}>{digit}</span>
+                ))}
               </div>
             </div>
           </div>
@@ -201,7 +211,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                   htmlFor="fullName" 
                   className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
                 >
-                  PAY TO THE ORDER OF:
+                  REGISTER TO THE ORDER OF:
                 </label>
                 <div className="flex-1 relative">
                   <input
@@ -370,15 +380,8 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
               )}
             </div>
 
-            {/* CHEQUE CONSIDERATION & SIGNATURE */}
+            {/* Signature */}
             <div className="pt-6 border-t-2 border-[#8B2616]/25 flex flex-wrap items-center justify-between gap-6 text-xs sm:text-sm text-[#5C4736]">
-              <div>
-                <span className="font-mono font-bold text-[#7B1F13]">CONSIDERATION: </span>
-                <span className="font-cursive text-2xl sm:text-3xl font-bold text-[#2C160B] block sm:inline mt-1 sm:mt-0">
-                  Admission to ConnectiFY'26 & Startup Immersion
-                </span>
-              </div>
-              
               {/* Signature Area */}
               <div className="text-right ml-auto">
                 <div className="w-56 border-b-2 border-dashed border-[#2C160B]/70 pb-1 text-center font-calligraphy text-3xl sm:text-4xl text-[#7B1F13]">

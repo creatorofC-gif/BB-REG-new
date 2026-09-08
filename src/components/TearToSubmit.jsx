@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ArrowDown, Scissors } from "lucide-react";
+import { ArrowRight, Scissors } from "lucide-react";
 
 export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidateBeforeTear }) {
-  const [dragY, setDragY] = useState(0);
+  const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isTorn, setIsTorn] = useState(false);
   const [keyHoldProgress, setKeyHoldProgress] = useState(0);
-  const dragStartYRef = useRef(0);
+  const dragStartXRef = useRef(0);
   const keyIntervalRef = useRef(null);
   const containerRef = useRef(null);
 
-  const TEAR_THRESHOLD = 95; // Pixels of downward drag required to trigger tear
+  const TEAR_THRESHOLD = 95; // Pixels of rightward drag required to trigger tear
 
   // Handle Drag Start (Mouse or Touch)
   const handlePointerDown = (e) => {
@@ -26,27 +26,27 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
     }
 
     setIsDragging(true);
-    dragStartYRef.current = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+    dragStartXRef.current = e.clientX || (e.touches && e.touches[0].clientX) || 0;
   };
 
   // Handle Pointer Move
   const handlePointerMove = (e) => {
     if (!isDragging || isSubmitting || isTorn) return;
 
-    const currentY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-    const deltaY = currentY - dragStartYRef.current;
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    const deltaX = currentX - dragStartXRef.current;
 
-    if (deltaY > 0) {
+    if (deltaX > 0) {
       // Apply slight damping resistance
-      const dampedY = Math.min(deltaY * 0.85, TEAR_THRESHOLD + 25);
-      setDragY(dampedY);
+      const dampedX = Math.min(deltaX * 0.85, TEAR_THRESHOLD + 25);
+      setDragX(dampedX);
 
       // Check if threshold reached
-      if (dampedY >= TEAR_THRESHOLD) {
+      if (dampedX >= TEAR_THRESHOLD) {
         triggerTear();
       }
     } else {
-      setDragY(0);
+      setDragX(0);
     }
   };
 
@@ -54,7 +54,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
   const triggerTear = () => {
     setIsDragging(false);
     setIsTorn(true);
-    setDragY(TEAR_THRESHOLD + 30);
+    setDragX(TEAR_THRESHOLD + 30);
 
     // Haptic feedback
     if (typeof window !== "undefined" && navigator.vibrate) {
@@ -110,7 +110,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
     const handleGlobalMouseUp = () => {
       if (isDragging) {
         setIsDragging(false);
-        setDragY(0);
+        setDragX(0);
       }
     };
     window.addEventListener("mouseup", handleGlobalMouseUp);
@@ -122,7 +122,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
     };
   }, [isDragging]);
 
-  const tearPercentage = Math.min(100, Math.round((dragY / TEAR_THRESHOLD) * 100));
+  const tearPercentage = Math.min(100, Math.round((dragX / TEAR_THRESHOLD) * 100));
 
   return (
     <div 
@@ -150,7 +150,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
           Ready to begin your journey?
         </p>
         <p className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-widest mt-0.5">
-          SWIPE DOWN TO TEAR & SUBMIT
+          SWIPE RIGHT TO TEAR & SUBMIT
         </p>
       </div>
 
@@ -160,7 +160,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
           isDragging ? "cursor-grabbing duration-75" : "cursor-grab duration-300"
         } ${isTorn ? "animate-torn-away pointer-events-none" : ""}`}
         style={{
-          transform: `translateY(${dragY}px) ${dragY > 0 ? `rotate(${dragY * 0.04}deg)` : ''}`,
+          transform: `translateX(${dragX}px) ${dragX > 0 ? `rotate(${dragX * 0.01}deg)` : ''}`,
           backgroundColor: isDragging ? "#EEDDBB" : "#F1E4C9",
           boxShadow: isDragging ? "0 15px 30px rgba(44, 22, 11, 0.35)" : "0 4px 12px rgba(44, 22, 11, 0.12)"
         }}
@@ -168,7 +168,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
         onTouchStart={handlePointerDown}
         tabIndex={0}
         role="button"
-        aria-label="Swipe down or hold Enter to tear cheque and submit registration"
+        aria-label="Swipe right or hold Enter to tear cheque and submit registration"
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
       >
@@ -182,19 +182,19 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
           </div>
 
           <div className="flex items-center justify-center gap-2 mt-1">
-            <ArrowDown className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-bounce"}`} />
+            <ArrowRight className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-pulse"}`} />
             <span className="font-cinzel text-xs sm:text-sm font-bold tracking-widest text-[#2C160B]">
               {isDragging 
                 ? `TEARING... ${tearPercentage}%` 
                 : isSubmitting 
                   ? "PROCESSING CHEQUE..." 
-                  : "PULL DOWN TO TEAR CHEQUE"}
+                  : "PULL RIGHT TO TEAR CHEQUE"}
             </span>
-            <ArrowDown className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-bounce"}`} />
+            <ArrowRight className={`w-4 h-4 text-[#8B2616] ${isDragging ? "scale-125" : "animate-pulse"}`} />
           </div>
 
           {/* Progress bar indication when dragging or holding key */}
-          {(dragY > 0 || keyHoldProgress > 0) && (
+          {(dragX > 0 || keyHoldProgress > 0) && (
             <div className="w-48 h-1.5 bg-[#DFC99E] rounded-full overflow-hidden mt-1 border border-[#8B2616]/20">
               <div 
                 className="h-full bg-gradient-to-r from-[#D4621E] to-[#7B1F13] transition-all"
@@ -205,7 +205,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
 
           {/* Accessible hint */}
           <span className="text-[10px] text-[#5C4736]/80 font-mono tracking-tight mt-0.5">
-            [Touch & Drag Downward or Hold Space/Enter to Submit]
+            [Touch & Drag Right or Hold Space/Enter to Submit]
           </span>
         </div>
       </div>
