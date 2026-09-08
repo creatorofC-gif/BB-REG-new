@@ -433,6 +433,8 @@ body::after {
   gap: 14px;
   text-decoration: none;
   min-height: 56px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .btn-vintage:hover {

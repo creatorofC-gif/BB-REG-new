@@ -130,9 +130,12 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
       <div className="page-container flex flex-col items-center">
         
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-widest mb-4 shadow-lg">
-            <Sparkles className="w-4 h-4 text-[#E5C368]" />
+        <ScrollReveal className="text-center mb-10 sm:mb-14 pb-2">
+          <div 
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-4 shadow-lg"
+            style={{ padding: "0.5rem 1.45rem" }}
+          >
+            <Sparkles className="w-4 h-4 text-[#E5C368] shrink-0" />
             <span>OFFICIAL REGISTRATION CHEQUE</span>
           </div>
           <h2 className="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black text-[#F8F3E6] tracking-wide">
@@ -157,7 +160,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
 
         {/* THE VINTAGE CHEQUE LEAF (Centered & Spacious on PC & Mobile) */}
         <ScrollReveal
-          className={`cheque-leaf security-pattern rounded-3xl p-7 sm:p-12 md:p-16 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
+          className={`cheque-leaf security-pattern rounded-3xl p-8 sm:p-12 md:p-16 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
             shakeError ? "animate-shake ring-4 ring-red-600/50" : ""
           }`}
         >
@@ -179,12 +182,8 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
               </div>
             </div>
 
-            {/* Serial Number & Vintage Boxed Date */}
+            {/* Vintage Boxed Date */}
             <div className="flex flex-col items-end gap-2.5 ml-auto">
-              <div className="font-mono text-xs sm:text-sm font-bold text-[#8B2616] tracking-widest bg-[#EBDDBE]/85 px-3 py-1 rounded-md border border-[#CBA344]/50 shadow-sm">
-                No. CCF-2026-0922
-              </div>
-
               {/* Live date boxes (DD / MM / YYYY) */}
               <div className="flex items-center gap-1.5 mt-1">
                 <span className="text-xs font-mono font-bold text-[#5C4736] mr-1">DATE:</span>
@@ -202,11 +201,11 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           </div>
 
           {/* CHEQUE FORM FIELDS */}
-          <form onSubmit={(e) => e.preventDefault()} className="mt-10 space-y-8 sm:space-y-10" noValidate>
+          <form onSubmit={(e) => e.preventDefault()} className="mt-8 sm:mt-10 space-y-7 sm:space-y-9 mb-4" noValidate>
             
             {/* FIELD 1: FULL NAME */}
             <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 <label 
                   htmlFor="fullName" 
                   className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
@@ -241,7 +240,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
 
             {/* FIELD 2: SOMAIYA EMAIL ID */}
             <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 <label 
                   htmlFor="email" 
                   className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
@@ -267,19 +266,15 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                   )}
                 </div>
               </div>
-              {errors.email ? (
+              {errors.email && (
                 <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
                   <AlertCircle className="w-4 h-4" /> {errors.email}
-                </p>
-              ) : (
-                <p className="text-xs text-[#5C4736]/80 font-sans mt-2">
-                  * Required domain: Only official <span className="font-mono font-bold text-[#7B1F13]">@somaiya.edu</span> email accounts are accepted.
                 </p>
               )}
             </div>
 
             {/* TWO COLUMN ROW: CONTACT NUMBER & YEAR OF STUDY */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9">
               
               {/* FIELD 3: CONTACT NUMBER (10 Digits) */}
               <div className="relative">
@@ -378,24 +373,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                   <AlertCircle className="w-4 h-4" /> {errors.branch}
                 </p>
               )}
-            </div>
-
-            {/* Signature */}
-            <div className="pt-6 border-t-2 border-[#8B2616]/25 flex flex-wrap items-center justify-between gap-6 text-xs sm:text-sm text-[#5C4736]">
-              {/* Signature Area */}
-              <div className="text-right ml-auto">
-                <div className="w-56 border-b-2 border-dashed border-[#2C160B]/70 pb-1 text-center font-calligraphy text-3xl sm:text-4xl text-[#7B1F13]">
-                  {formData.fullName ? formData.fullName : "Student Signature"}
-                </div>
-                <div className="text-[11px] font-cinzel font-bold text-[#5C4736] tracking-widest mt-1">
-                  AUTHORIZED PARTICIPANT
-                </div>
-              </div>
-            </div>
-
-            {/* MICR Encoding Stripe */}
-            <div className="micr-line text-center pt-6 pb-2 border-t border-[#8B2616]/25 select-none font-mono text-xs sm:text-sm tracking-[0.25em] text-[#5C4736]/80">
-              ⑈ 220926 ⑈ 2026 ⑈ 400113 ⑈ 26
             </div>
 
             {/* SIGNATURE TEAR-TO-SUBMIT PERFORATED COMPONENT */}

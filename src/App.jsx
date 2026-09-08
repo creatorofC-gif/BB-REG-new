@@ -48,13 +48,10 @@ export function App() {
           {submissionSuccess ? <SuccessReceipt registrationData={registeredData} onReset={handleReset} /> : <ChequeForm onSubmit={handleSubmit} isSubmitting={isSubmitting} serverError={serverError} />}
         </div>
       </main>
-      <footer className="w-full relative z-20 border-t border-[#8B2616]/40 bg-[#100905] py-8 sm:py-10 px-4 text-center text-xs text-[#DFC99E]/80 flex flex-col items-center">
-        <div className="page-container flex flex-col items-center gap-3">
+      <footer className="w-full relative z-20 bg-transparent py-6 sm:py-8 px-4 text-center text-xs text-[#DFC99E]/80 flex flex-col items-center">
+        <div className="page-container flex flex-col items-center gap-1">
           <div className="text-[#E5C368] font-cinzel font-bold text-sm sm:text-base tracking-widest">CONNECTIFY'26</div>
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs font-mono text-[#CBA344]/90">
-            <span>DATE: 22 SEPT 2026</span><span>TIME: 4:00 PM</span><span>VENUE: ROOM B-113</span>
-          </div>
-          <p className="text-[11px] text-[#DFC99E]/50 mt-2">© 2026 BloomBox. All rights reserved.</p>
+          <p className="text-xs sm:text-sm text-[#DFC99E]/65 mt-0.5 font-sans">© 2026 BloomBox. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -26,7 +26,7 @@
 
 // If running as standalone script, paste your Spreadsheet ID here.
 // If attached to a Spreadsheet directly (Extensions > Apps Script), leave as empty string.
-const SPREADSHEET_ID = ""; 
+const SPREADSHEET_ID = "1frYUicbdTAuRJPTqr4Rg7imj-5P7DwBHyMGxnFC_gfA"; 
 const SHEET_NAME = "Registrations";
 
 function doPost(e) {
@@ -148,7 +148,7 @@ function doPost(e) {
 
     return createJsonResponse({
       status: "success",
-      message: "Registration successful! Welcome aboard ConnectiFY'26.",
+      message: "Your response has been submitted successfully. Welcome aboard ConnectiFY'26!",
       entry: {
         timestamp: formattedTimestamp,
         fullName: fullName,
