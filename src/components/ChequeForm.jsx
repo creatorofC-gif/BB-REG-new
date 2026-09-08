@@ -131,8 +131,11 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
         
         {/* Section Header */}
         <ScrollReveal className="text-center mb-10 sm:mb-14 pb-2">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-widest mb-4 shadow-lg">
-            <Sparkles className="w-4 h-4 text-[#E5C368]" />
+          <div 
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-4 shadow-lg"
+            style={{ padding: "0.5rem 1.45rem" }}
+          >
+            <Sparkles className="w-4 h-4 text-[#E5C368] shrink-0" />
             <span>OFFICIAL REGISTRATION CHEQUE</span>
           </div>
           <h2 className="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black text-[#F8F3E6] tracking-wide">
@@ -157,7 +160,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
 
         {/* THE VINTAGE CHEQUE LEAF (Centered & Spacious on PC & Mobile) */}
         <ScrollReveal
-          className={`cheque-leaf security-pattern rounded-3xl p-6 sm:p-10 md:p-14 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
+          className={`cheque-leaf security-pattern rounded-3xl p-8 sm:p-12 md:p-16 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
             shakeError ? "animate-shake ring-4 ring-red-600/50" : ""
           }`}
         >
@@ -198,14 +201,14 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           </div>
 
           {/* CHEQUE FORM FIELDS */}
-          <form onSubmit={(e) => e.preventDefault()} className="mt-10 space-y-8 sm:space-y-10" noValidate>
+          <form onSubmit={(e) => e.preventDefault()} className="mt-8 sm:mt-10 space-y-7 sm:space-y-9 mb-4" noValidate>
             
             {/* FIELD 1: FULL NAME */}
             <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pb-1">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 <label 
                   htmlFor="fullName" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0 pb-1"
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
                 >
                   REGISTER TO THE ORDER OF:
                 </label>
@@ -237,10 +240,10 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
 
             {/* FIELD 2: SOMAIYA EMAIL ID */}
             <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pb-1">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 <label 
                   htmlFor="email" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0 pb-1"
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
                 >
                   SOMAIYA EMAIL ID:
                 </label>
@@ -263,19 +266,15 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                   )}
                 </div>
               </div>
-              {errors.email ? (
+              {errors.email && (
                 <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
                   <AlertCircle className="w-4 h-4" /> {errors.email}
-                </p>
-              ) : (
-                <p className="text-xs text-[#5C4736]/80 font-sans mt-2 mb-1">
-                  * Required domain: Only official <span className="font-mono font-bold text-[#7B1F13]">@somaiya.edu</span> email accounts are accepted.
                 </p>
               )}
             </div>
 
             {/* TWO COLUMN ROW: CONTACT NUMBER & YEAR OF STUDY */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9">
               
               {/* FIELD 3: CONTACT NUMBER (10 Digits) */}
               <div className="relative">
@@ -345,7 +344,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
             </div>
 
             {/* FIELD 5: COLLEGE / ENGINEERING BRANCH */}
-            <div className="relative pt-2">
+            <div className="relative">
               <label 
                 htmlFor="branch" 
                 className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider block mb-2"

@@ -5,7 +5,10 @@
  * Replace the string below with your deployed Google Apps Script Web App URL.
  * Example: "https://script.google.com/macros/s/AKfycbx.../exec"
  */
-export const GOOGLE_APPS_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+export const GOOGLE_APPS_SCRIPT_URL = 
+  (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL) 
+    ? import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL 
+    : "https://script.google.com/macros/s/AKfycbyuOv5cfnzZV3dGXJqG2nE10UUh7pgGW0xO8vwrgrXZMKEjXZMXgX8T2fndtaNY3jE/exec";
 
 /**
  * HERO ARTWORK / POSTER IMAGE PATH

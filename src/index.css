@@ -248,6 +248,8 @@ body::after {
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
+  padding: 2.75rem 3.25rem !important;
+  box-sizing: border-box;
 }
 
 .cheque-leaf::before {
@@ -743,22 +745,46 @@ body::after {
   padding-right: 18rem;
 }
 
+.success-details {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
 .success-details > div {
-  padding: 1rem 1.1rem;
+  padding: 1.15rem 1.25rem;
   min-width: 0;
 }
 
+.success-logistics {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  padding: 1.5rem 1.75rem !important;
+}
+
+.success-logistics h4 {
+  margin-bottom: 1.15rem !important;
+}
+
 .success-logistics > div {
-  align-items: start;
+  align-items: center;
+}
+
+.success-actions {
+  margin-top: 2rem !important;
+  padding-top: 1.75rem !important;
 }
 
 .success-actions > div:first-child {
   min-width: 0;
 }
 
-.success-actions .btn-vintage {
+.success-actions .btn-vintage,
+.success-actions button {
   min-height: 3.25rem;
-  padding: 0.85rem 1.25rem;
+  padding: 0.75rem 1.75rem !important;
+  box-sizing: border-box;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
 }
 
 /* Scroll-linked route in the navigation map */
@@ -803,6 +829,7 @@ body::after {
   transform: translateY(1.5rem) scale(0.97);
   transition: opacity 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 250ms ease, background-color 250ms ease;
   box-sizing: border-box;
+  padding: 1.35rem 1.25rem;
 }
 
 .journey-step.is-revealed { opacity: 1; transform: translateY(0) scale(1); }
@@ -857,7 +884,7 @@ body::after {
     height: 1.1rem;
   }
   .hero-title-compass { font-size: clamp(2.65rem, 13vw, 4rem); letter-spacing: 0; }
-  .section-cheque .cheque-leaf { width: 100%; max-width: 100%; box-sizing: border-box; padding: 1.5rem 1.25rem; }
+  .section-cheque .cheque-leaf { width: 100%; max-width: 100%; box-sizing: border-box; padding: 2rem 1.75rem !important; }
   .date-box { width: 21px; height: 26px; font-size: 0.8rem; }
   .registered-stamp { padding: 8px 16px; letter-spacing: 0.12em; font-size: 0.85rem; max-width: 100%; box-sizing: border-box; }
   .success-layout { padding-inline: 0.25rem; }
@@ -868,7 +895,7 @@ body::after {
   .success-receipt-header { min-height: 0; padding-right: 0; text-align: center; }
   .success-receipt-header > div { justify-content: center; text-align: center; }
   .success-details > div { padding: 0.9rem; overflow-wrap: break-word; word-break: break-word; }
-  .success-logistics { padding: 1rem; }
+  .success-logistics { padding: 1.25rem 1rem !important; }
   .success-actions { display: grid; grid-template-columns: 1fr; }
   .success-actions > div:first-child { display: grid; grid-template-columns: 1fr; width: 100%; }
   .success-actions .btn-vintage, .success-actions button { width: 100%; justify-content: center; max-width: 100%; box-sizing: border-box; }
@@ -895,6 +922,6 @@ body::after {
     font-size: 0.75rem;
   }
   .section-cheque .cheque-leaf {
-    padding: 1.25rem 0.9rem;
+    padding: 1.75rem 1.4rem !important;
   }
 }

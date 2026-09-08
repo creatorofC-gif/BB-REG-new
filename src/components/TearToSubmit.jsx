@@ -127,7 +127,7 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
   return (
     <div 
       ref={containerRef}
-      className="relative select-none w-full"
+      className="relative select-none w-full mt-8 sm:mt-10"
       onPointerMove={handlePointerMove}
       onTouchMove={handlePointerMove}
     >

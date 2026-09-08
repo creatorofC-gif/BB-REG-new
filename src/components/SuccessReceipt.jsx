@@ -103,8 +103,8 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Student Details Grid */}
-          <div className="success-details grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 my-6 text-left">
-            <div className="p-5 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
+          <div className="success-details grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mt-6 mb-8 text-left">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
               <span className="text-xs font-cinzel font-bold text-[#7B1F13] uppercase tracking-wider block">
                 ADMITTED EXPLORER
               </span>
@@ -113,7 +113,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
               <span className="text-xs font-cinzel font-bold text-[#7B1F13] uppercase tracking-wider block">
                 SOMAIYA ID
               </span>
@@ -122,7 +122,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
               <span className="text-xs font-cinzel font-bold text-[#7B1F13] uppercase tracking-wider block">
                 ACADEMIC YEAR & BRANCH
               </span>
@@ -131,7 +131,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
               <span className="text-xs font-cinzel font-bold text-[#7B1F13] uppercase tracking-wider block">
                 CONTACT NUMBER
               </span>
@@ -142,13 +142,13 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Event Schedule Reminders */}
-          <div className="success-logistics my-6 p-5 sm:p-6 rounded-2xl bg-[#2C160B] text-[#F8F3E6] border border-[#CBA344] shadow-xl">
-            <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C368] tracking-widest uppercase mb-4">
+          <div className="success-logistics my-8 p-6 sm:p-7 md:p-8 rounded-2xl bg-[#2C160B] text-[#F8F3E6] border border-[#CBA344] shadow-xl">
+            <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C368] tracking-widest uppercase mb-5">
               EVENT LOGISTICS & VENUE BRIEFING
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-sm sm:text-base">
               <div className="flex items-center gap-3.5">
-                <Calendar className="w-6 h-6 text-[#FF9955]" />
+                <Calendar className="w-6 h-6 text-[#FF9955] shrink-0" />
                 <div>
                   <div className="text-[10px] text-[#DFC99E]/70 font-mono">DATE</div>
                   <div className="font-bold font-cinzel text-base sm:text-lg">22 SEPT 2026</div>
@@ -156,7 +156,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               </div>
 
               <div className="flex items-center gap-3.5">
-                <Clock className="w-6 h-6 text-[#FF9955]" />
+                <Clock className="w-6 h-6 text-[#FF9955] shrink-0" />
                 <div>
                   <div className="text-[10px] text-[#DFC99E]/70 font-mono">TIME</div>
                   <div className="font-bold font-cinzel text-base sm:text-lg">4:00 PM ONWARDS</div>
@@ -164,7 +164,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               </div>
 
               <div className="flex items-center gap-3.5">
-                <MapPin className="w-6 h-6 text-[#FF9955]" />
+                <MapPin className="w-6 h-6 text-[#FF9955] shrink-0" />
                 <div>
                   <div className="text-[10px] text-[#DFC99E]/70 font-mono">VENUE</div>
                   <div className="font-bold font-cinzel text-base sm:text-lg">ROOM B-113, KJSCE</div>
@@ -174,34 +174,35 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Action Buttons */}
-          <div className="success-actions flex flex-wrap items-center justify-between gap-4 pt-6 border-t-2 border-[#8B2616]/30">
+          <div className="success-actions flex flex-wrap items-center justify-between gap-4 pt-8 border-t-2 border-[#8B2616]/30">
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href={getGoogleCalendarUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-vintage rounded-xl text-sm sm:text-base px-8 py-4 flex items-center gap-2.5 shadow-lg"
+                className="btn-vintage rounded-xl text-xs sm:text-sm md:text-base px-6 sm:px-8 py-3.5 sm:py-4 flex items-center gap-2.5 shadow-lg whitespace-nowrap"
               >
-                <Calendar className="w-5 h-5 text-[#FFE8A3]" />
+                <Calendar className="w-5 h-5 text-[#FFE8A3] shrink-0" />
                 <span>ADD TO GOOGLE CALENDAR</span>
-                <ExternalLink className="w-4 h-4 opacity-80" />
+                <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
               </a>
 
               <button
                 onClick={handlePrint}
-                className="px-6 py-4 rounded-xl border border-[#8B2616]/40 bg-[#EBDDBE] text-[#2C160B] hover:bg-[#DFC99E] font-cinzel font-bold text-sm sm:text-base flex items-center gap-2.5 transition-colors shadow-sm cursor-pointer"
+                className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-[#8B2616]/40 bg-[#EBDDBE] text-[#2C160B] hover:bg-[#DFC99E] font-cinzel font-bold text-xs sm:text-sm tracking-wider flex items-center gap-2.5 transition-colors shadow-sm cursor-pointer whitespace-nowrap shrink-0"
               >
-                <Printer className="w-4 h-4 text-[#7B1F13]" />
+                <Printer className="w-4 h-4 text-[#7B1F13] shrink-0" />
                 <span>PRINT / SAVE PASS</span>
               </button>
             </div>
 
             <button
               onClick={onReset}
-              className="text-sm sm:text-base font-cinzel font-bold text-[#7B1F13] hover:text-[#561108] underline px-4 py-2 transition-colors ml-auto cursor-pointer"
+              className="text-xs sm:text-sm md:text-base font-cinzel font-bold text-[#7B1F13] hover:text-[#561108] underline px-4 py-2 transition-colors ml-auto cursor-pointer whitespace-nowrap"
             >
               Register Another Student →
             </button>
+          </div>
         </div>
 
         <GreekBorder className="mt-12 sm:mt-16 opacity-85 max-w-2xl" />

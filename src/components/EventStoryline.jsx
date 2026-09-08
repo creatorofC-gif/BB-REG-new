@@ -40,15 +40,15 @@ export function EventStoryline() {
     <section className="section-storyline relative flex flex-col items-center justify-center z-10">
       <div className="page-container text-center flex flex-col items-center">
         {/* Section Headline */}
-        <ScrollReveal className="mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#E5C368] font-bold mb-3">
+        <ScrollReveal className="mb-12 sm:mb-16 text-center flex flex-col items-center w-full">
+          <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#E5C368] font-bold mb-3 justify-center">
             <Compass className="w-4 h-4 animate-spin" style={{ animationDuration: '24s' }} />
             <span>THE ENTREPRENEURIAL NAVIGATION MAP</span>
           </div>
-          <h3 className="font-cinzel text-3xl sm:text-5xl font-black text-[#F8F3E6] tracking-wide mt-2">
+          <h3 className="font-cinzel text-3xl sm:text-5xl font-black text-[#F8F3E6] tracking-wide mt-2 text-center">
             5 Waypoints Towards Startup Success
           </h3>
-          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] max-w-xl mx-auto mt-3 font-normal">
+          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] max-w-xl mx-auto mt-3 font-normal text-center">
             Your pathway from initial college sparks to venture launch.
           </p>
         </ScrollReveal>
@@ -66,7 +66,7 @@ export function EventStoryline() {
           {WAYPOINTS.map((wp, index) => (
             <div
               key={wp.step}
-              className={`journey-step relative flex flex-col justify-between p-5 sm:p-6 lg:p-4 xl:p-5 rounded-2xl bg-[#2A160A]/95 border-2 border-[#CBA344]/40 hover:border-[#E5C368] hover:bg-[#341B0D]/95 hover:scale-[1.03] shadow-xl group text-left ${index <= activeStep ? "is-revealed" : ""}`}
+              className={`journey-step relative flex flex-col justify-between p-5 sm:p-6 lg:p-5 xl:p-6 rounded-2xl bg-[#2A160A]/95 border-2 border-[#CBA344]/40 hover:border-[#E5C368] hover:bg-[#341B0D]/95 hover:scale-[1.03] shadow-xl group text-left ${index <= activeStep ? "is-revealed" : ""}`}
             >
               <div>
                 {/* Step badge */}

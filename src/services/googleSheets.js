@@ -68,16 +68,31 @@ export async function submitRegistration(formData) {
     branch: formData.branch.trim()
   };
 
-  // Check if user has updated the URL
+  // Detect temporary echo URLs vs permanent Web App deployment URLs
+  const isEchoUrl = GOOGLE_APPS_SCRIPT_URL.includes("script.googleusercontent.com/macros/echo");
+  if (isEchoUrl) {
+    console.error(
+      "❌ Invalid Apps Script URL: You have provided a temporary browser echo redirect URL.\n" +
+      "Please copy the official Web App URL from Apps Script editor (Deploy > Manage deployments).\n" +
+      "It must look like: https://script.google.com/macros/s/AKfycbx.../exec"
+    );
+    return {
+      success: false,
+      error: "Temporary Google echo URL provided",
+      message: "Configuration Error: Please use the official Web App URL ending in /exec from Google Apps Script (Deploy > Manage deployments)."
+    };
+  }
+
+  // Check if user has configured a valid Apps Script URL
   const isUrlConfigured =
     GOOGLE_APPS_SCRIPT_URL &&
     GOOGLE_APPS_SCRIPT_URL !== "PASTE_YOUR_APPS_SCRIPT_URL_HERE" &&
-    GOOGLE_APPS_SCRIPT_URL.startsWith("https://script.google.com");
+    GOOGLE_APPS_SCRIPT_URL.startsWith("https://script.google.com/macros/s/");
 
   if (!isUrlConfigured) {
     console.warn(
       "⚠️ Google Apps Script URL not configured yet. Simulating successful registration for preview.\n" +
-      "To connect live Google Sheets, paste your deployed Web App URL into src/config/constants.js"
+      "To connect live Google Sheets, paste your deployed Web App URL into src/config/constants.js or .env"
     );
     // Simulate network latency
     await new Promise((resolve) => setTimeout(resolve, 800));
@@ -90,7 +105,7 @@ export async function submitRegistration(formData) {
   }
 
   try {
-    // We send payload as text/plain to avoid CORS preflight options blocking
+    // Send payload as text/plain to avoid CORS preflight OPTIONS blocking
     const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
       method: "POST",
       headers: {
@@ -99,13 +114,19 @@ export async function submitRegistration(formData) {
       body: JSON.stringify(payload)
     });
 
-    const result = await response.json();
+    const responseText = await response.text();
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      throw new Error("Server returned non-JSON response. Please check Apps Script deployment permissions (Must be set to 'Anyone').");
+    }
 
     if (result && result.status === "success") {
       return {
         success: true,
         data: payload,
-        message: result.message || "Registration recorded successfully"
+        message: result.message || "Your response has been submitted successfully."
       };
     } else {
       throw new Error(result?.message || "Server returned unsuccessful status");
@@ -115,7 +136,7 @@ export async function submitRegistration(formData) {
     return {
       success: false,
       error: error.message || "Failed to reach Google Sheets endpoint",
-      message: "Something went wrong while processing your registration. Please try again."
+      message: error.message || "Something went wrong while processing your registration. Please try again."
     };
   }
 }
