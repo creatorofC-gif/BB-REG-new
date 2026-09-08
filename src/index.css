@@ -1,0 +1,498 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600;700&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Courier+Prime:wght@400;700&family=Great+Vibes&family=Marck+Script&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Color Palette matching the ConnectiFY'26 Poster */
+  --color-burnt-orange: #C85A17;
+  --color-burnt-orange-dark: #A3420C;
+  --color-burnt-orange-light: #E0732A;
+  --color-parchment-bg: #140C07;
+  --color-parchment-card: #F7F1E1;
+  --color-parchment-deep: #EBDDBE;
+  --color-parchment-aged: #DFC99E;
+  --color-deep-brown: #2C160B;
+  --color-dark-maroon: #7B1F13;
+  --color-maroon-dark: #561108;
+  --color-muted-gold: #CBA344;
+  --color-gold-bright: #E5C368;
+  --color-gold-dark: #9E7B26;
+  --color-dark-navy: #132733;
+  --color-ocean-deep: #0D1C26;
+  --color-ink-dark: #221207;
+  --color-ink-muted: #5C4736;
+  --color-border-parchment: #C7B083;
+
+  /* Typography */
+  --font-serif-hero: 'Cinzel', Georgia, serif;
+  --font-serif-decorative: 'Cinzel Decorative', serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-cursive: 'Great Vibes', 'Alex Brush', cursive;
+  --font-calligraphy: 'Alex Brush', cursive;
+  --font-marck: 'Marck Script', cursive;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Courier Prime', 'Space Mono', monospace;
+  --font-script: 'Caveat', cursive;
+
+  /* Shadows & Depth */
+  --shadow-parchment: 0 10px 30px -5px rgba(28, 14, 5, 0.45), 0 0 0 1px rgba(199, 176, 131, 0.4);
+  --shadow-cheque: 0 35px 80px -15px rgba(0, 0, 0, 0.9), 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 100px rgba(199, 155, 80, 0.1);
+  --shadow-stamp: 0 8px 25px rgba(123, 31, 19, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-parchment-bg);
+  color: #F8F3E6;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(200, 90, 23, 0.4) 0%, rgba(20, 12, 7, 0.96) 75%),
+    radial-gradient(ellipse at 50% 100%, rgba(19, 39, 51, 0.7) 0%, rgba(12, 7, 3, 0.98) 80%),
+    #120B06;
+  background-attachment: fixed;
+  color: #F8F3E6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Aged Parchment / Canvas Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(203, 163, 68, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Subtle Vignette Frame */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 140px rgba(8, 4, 1, 0.85);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Distinct Section Spacing - Even & Balanced */
+.section-hero {
+  width: 100%;
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+}
+
+.section-storyline {
+  width: 100%;
+  padding-top: 5.5rem;
+  padding-bottom: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-top: 1px solid rgba(203, 163, 68, 0.2);
+  border-bottom: 1px solid rgba(203, 163, 68, 0.2);
+  background: radial-gradient(ellipse at 50% 50%, rgba(42, 22, 10, 0.55) 0%, transparent 80%);
+}
+
+.section-cheque {
+  width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 9rem;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-hero {
+    padding-top: 6rem;
+    padding-bottom: 8rem;
+  }
+  .section-storyline {
+    padding-top: 7rem;
+    padding-bottom: 8rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  .section-cheque {
+    padding-top: 7.5rem;
+    padding-bottom: 11rem;
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+  }
+}
+
+/* Centered Layout Wrapper */
+.page-container {
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-container {
+    max-width: 1240px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #140C07;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-burnt-orange);
+  border-radius: 4px;
+  border: 1px solid var(--color-muted-gold);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-bright);
+}
+
+/* Typography Utility Classes */
+.font-cinzel {
+  font-family: var(--font-serif-hero);
+  letter-spacing: 0.06em;
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+.font-calligraphy {
+  font-family: var(--font-calligraphy);
+}
+
+.font-marck {
+  font-family: var(--font-marck);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Cheque Specific Styles */
+.cheque-leaf {
+  background-color: var(--color-parchment-card);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(203, 163, 68, 0.09) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(200, 90, 23, 0.07) 0%, transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(199, 176, 131, 0.04) 0px,
+      rgba(199, 176, 131, 0.04) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  color: var(--color-ink-dark);
+  box-shadow: var(--shadow-cheque);
+  border: 2px solid var(--color-border-parchment);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.cheque-leaf::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1.5px dashed rgba(123, 31, 19, 0.35);
+  pointer-events: none;
+}
+
+/* Security Pattern Guilloche Effect */
+.security-pattern {
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(203, 163, 68, 0.12) 0%, transparent 60%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 8px, rgba(200, 90, 23, 0.035) 9px, transparent 10px);
+}
+
+/* Vintage Form Inputs */
+.cheque-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(44, 22, 11, 0.45);
+  color: var(--color-ink-dark);
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 12px 8px 8px 8px;
+  width: 100%;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.cheque-input:focus {
+  outline: none;
+  border-bottom: 2.5px solid var(--color-dark-maroon);
+  background: rgba(203, 163, 68, 0.12);
+}
+
+.cheque-input::placeholder {
+  color: rgba(92, 71, 54, 0.55);
+  font-weight: 400;
+  font-style: italic;
+  font-family: var(--font-editorial);
+  font-size: 1.15rem;
+}
+
+.cheque-input.has-error {
+  border-bottom: 2.5px solid #B91C1C;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.cheque-select {
+  appearance: none;
+  background: transparent url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232C160B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat;
+  background-position: right 14px center;
+  background-size: 18px;
+  border: none;
+  border-bottom: 2px solid rgba(44, 22, 11, 0.45);
+  color: var(--color-ink-dark);
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 40px 8px 8px;
+  width: 100%;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.cheque-select:focus {
+  outline: none;
+  border-bottom: 2.5px solid var(--color-dark-maroon);
+  background-color: rgba(203, 163, 68, 0.12);
+}
+
+.cheque-select.has-error {
+  border-bottom: 2.5px solid #B91C1C;
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.cheque-select option {
+  background-color: #F7F1E1;
+  color: #2C160B;
+  font-size: 1.05rem;
+  padding: 12px;
+}
+
+/* Date Box Styling */
+.date-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 30px;
+  border: 1.5px solid rgba(44, 22, 11, 0.5);
+  background: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-ink-dark);
+}
+
+/* MICR Line Styling */
+.micr-line {
+  font-family: var(--font-mono);
+  letter-spacing: 0.22em;
+  font-size: 0.95rem;
+  color: rgba(44, 22, 11, 0.75);
+  user-select: none;
+}
+
+/* Perforation Tear Line */
+.tear-perforation {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+}
+
+.tear-line-dashed {
+  width: 100%;
+  height: 2px;
+  border-top: 2.5px dashed rgba(123, 31, 19, 0.55);
+}
+
+/* Left & Right Notches */
+.tear-notch-left {
+  position: absolute;
+  left: -2px;
+  width: 16px;
+  height: 28px;
+  background-color: var(--color-parchment-bg);
+  border-radius: 0 14px 14px 0;
+  border: 2px solid var(--color-border-parchment);
+  border-left: none;
+}
+
+.tear-notch-right {
+  position: absolute;
+  right: -2px;
+  width: 16px;
+  height: 28px;
+  background-color: var(--color-parchment-bg);
+  border-radius: 14px 0 0 14px;
+  border: 2px solid var(--color-border-parchment);
+  border-right: none;
+}
+
+/* Wax Seal & Stamp */
+.registered-stamp {
+  border: 4px double var(--color-dark-maroon);
+  color: var(--color-dark-maroon);
+  padding: 14px 26px;
+  text-transform: uppercase;
+  font-family: var(--font-serif-hero);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  transform: rotate(-8deg);
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(123, 31, 19, 0.2), inset 0 0 20px rgba(123, 31, 19, 0.18);
+}
+
+/* Interactive CTA button */
+.btn-vintage {
+  background: linear-gradient(180deg, #D4621E 0%, #A3420C 100%);
+  color: #FFF6E5;
+  font-family: var(--font-serif-hero);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  border: 1.5px solid var(--color-gold-bright);
+  box-shadow: 0 8px 25px rgba(200, 90, 23, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  padding: 18px 42px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-decoration: none;
+  min-height: 56px;
+}
+
+.btn-vintage:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(200, 90, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, #E0732A 0%, #B34710 100%);
+}
+
+.btn-vintage:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(200, 90, 23, 0.45);
+}
+
+/* Animations */
+@keyframes compassSpin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-compass {
+  animation: compassSpin 8s ease-in-out infinite;
+}
+
+@keyframes gentleWave {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+.animate-ship-float {
+  animation: gentleWave 6s ease-in-out infinite;
+}
+
+@keyframes tearSeparate {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  40% { transform: translateY(22px) rotate(1.5deg); opacity: 0.95; }
+  100% { transform: translateY(90px) rotate(4deg); opacity: 0; }
+}
+
+.animate-torn-away {
+  animation: tearSeparate 0.65s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+@keyframes stampSlam {
+  0% { transform: scale(2.2) rotate(-20deg); opacity: 0; }
+  70% { transform: scale(0.92) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-8deg); opacity: 1; }
+}
+
+.animate-stamp-slam {
+  animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-shake {
+  animation: shakeError 0.4s ease-in-out;
+}
