@@ -19,7 +19,7 @@ export const EVENT_DETAILS = {
   name: "ConnectiFY'26",
   tagline: "Start Your Journey Towards Entrepreneurship",
   heroHeadline: "Your First Step Into Entrepreneurship Starts Here.",
-  subtext: "An exclusive induction for newly admitted students to begin their entrepreneurial voyage, connect with bold ideas, visionary peers, and transformative opportunities at KJSCE.",
+  subtext: "An exclusive induction for newly admitted students to begin their entrepreneurial journey, connect with bold ideas, visionary peers, and transformative opportunities.",
   date: "22nd September, 2026",
   dateFormatted: "22 / 09 / 2026",
   time: "4:00 PM onwards",

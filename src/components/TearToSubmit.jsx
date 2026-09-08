@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ArrowDown, Scissors, Check, Sparkles, AlertCircle } from "lucide-react";
-import { sounds } from "../utils/audio";
+import { ArrowDown, Scissors } from "lucide-react";
 
 export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidateBeforeTear }) {
   const [dragY, setDragY] = useState(0);
@@ -20,8 +19,6 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
     // First validate the form
     const valid = onValidateBeforeTear ? onValidateBeforeTear() : isValid;
     if (!valid) {
-      // Trigger error sound and vibration
-      sounds.playFrictionTick(0.8);
       if (typeof window !== "undefined" && navigator.vibrate) {
         navigator.vibrate(100);
       }
@@ -30,7 +27,6 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
 
     setIsDragging(true);
     dragStartYRef.current = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-    sounds.playFrictionTick(0.2);
   };
 
   // Handle Pointer Move
@@ -45,11 +41,6 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
       const dampedY = Math.min(deltaY * 0.85, TEAR_THRESHOLD + 25);
       setDragY(dampedY);
 
-      // Play subtle paper stress ticks
-      if (Math.floor(dampedY) % 15 === 0) {
-        sounds.playFrictionTick(dampedY / TEAR_THRESHOLD);
-      }
-
       // Check if threshold reached
       if (dampedY >= TEAR_THRESHOLD) {
         triggerTear();
@@ -59,25 +50,11 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
     }
   };
 
-  // Handle Pointer End / Cancel
-  const handlePointerUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-
-    if (dragY < TEAR_THRESHOLD) {
-      // Snap back if not completed
-      setDragY(0);
-    }
-  };
-
   // Execute the official tear
   const triggerTear = () => {
     setIsDragging(false);
     setIsTorn(true);
     setDragY(TEAR_THRESHOLD + 30);
-
-    // Audio effect: Paper rip
-    sounds.playPaperTear();
 
     // Haptic feedback
     if (typeof window !== "undefined" && navigator.vibrate) {
@@ -98,7 +75,6 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
 
       const valid = onValidateBeforeTear ? onValidateBeforeTear() : isValid;
       if (!valid) {
-        sounds.playFrictionTick(0.8);
         return;
       }
 
@@ -111,7 +87,6 @@ export function TearToSubmit({ onTearComplete, isSubmitting, isValid, onValidate
               triggerTear();
               return 100;
             }
-            sounds.playFrictionTick(prev / 100);
             return prev + 12;
           });
         }, 50);

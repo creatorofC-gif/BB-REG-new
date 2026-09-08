@@ -4,24 +4,14 @@ import {
   Calendar, 
   Clock, 
   MapPin, 
-  CheckCircle, 
-  Download, 
-  Share2, 
-  Sparkles, 
   Compass,
-  ArrowRight,
   ExternalLink,
   Printer
 } from "lucide-react";
-import { EVENT_DETAILS } from "../config/constants";
 import GreekBorder from "./GreekBorder";
-import { sounds } from "../utils/audio";
 
 export function SuccessReceipt({ registrationData, onReset }) {
   useEffect(() => {
-    // Play official stamp sound
-    sounds.playStamp();
-
     // Trigger celebratory gold and terracotta confetti
     try {
       const end = Date.now() + 1.2 * 1000;
@@ -66,7 +56,6 @@ export function SuccessReceipt({ registrationData, onReset }) {
   };
 
   const handlePrint = () => {
-    sounds.playFrictionTick(0.2);
     if (typeof window !== "undefined") {
       window.print();
     }
@@ -74,23 +63,23 @@ export function SuccessReceipt({ registrationData, onReset }) {
 
   return (
     <section className="section-cheque relative flex flex-col items-center justify-center z-20">
-      <div className="page-container flex flex-col items-center max-w-4xl text-center">
+      <div className="page-container success-layout flex flex-col items-center text-center">
         
         <GreekBorder className="mb-8 sm:mb-12 opacity-85 max-w-2xl" />
         
         {/* Animated Celebration Title */}
-        <h2 className="font-cinzel text-5xl sm:text-7xl md:text-8xl font-black text-[#E5C368] tracking-widest uppercase drop-shadow-2xl">
+        <h2 className="success-title font-cinzel font-black text-[#E5C368] tracking-widest uppercase drop-shadow-2xl">
           YOU'RE IN.
         </h2>
-        <p className="font-cursive text-3xl sm:text-5xl md:text-6xl text-[#DFC99E] mt-4 mb-12 sm:mb-16 font-normal">
+        <p className="success-subtitle font-cursive text-[#DFC99E] font-normal">
           Your journey towards entrepreneurship begins on 22 September.
         </p>
 
         {/* PROCESSED REGISTRATION CERTIFICATE / CHEQUE VOUCHER */}
-        <div className="cheque-leaf security-pattern rounded-3xl p-8 sm:p-12 md:p-16 shadow-3xl border-2 border-[#CBA344] relative overflow-hidden text-left w-full">
+        <div className="success-receipt cheque-leaf security-pattern rounded-3xl p-6 sm:p-8 md:p-10 shadow-3xl border-2 border-[#CBA344] relative overflow-hidden text-left w-full">
           
           {/* Official Processed Stamp (Slam Animation) */}
-          <div className="absolute top-6 right-6 sm:top-10 sm:right-12 z-30 animate-stamp-slam pointer-events-none">
+          <div className="success-stamp animate-stamp-slam pointer-events-none">
             <div className="registered-stamp bg-[#F7F1E1]/90 backdrop-blur-sm">
               <div className="text-xs tracking-widest text-[#8B2616]">BLOOMBOX E-CELL</div>
               <div className="text-xl sm:text-2xl font-black text-[#7B1F13]">OFFICIALLY ADMITTED</div>
@@ -99,7 +88,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Header of Receipt */}
-          <div className="border-b-2 border-[#8B2616]/30 pb-6 mb-8">
+          <div className="success-receipt-header border-b-2 border-[#8B2616]/30 pb-6 mb-7">
             <div className="flex items-center gap-4">
               <Compass className="w-10 h-10 text-[#C85A17] animate-compass" />
               <div>
@@ -114,7 +103,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Student Details Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 my-8 text-left">
+          <div className="success-details grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 my-6 text-left">
             <div className="p-5 rounded-2xl bg-[#EBDDBE]/75 border border-[#CBA344]/50 shadow-sm">
               <span className="text-xs font-cinzel font-bold text-[#7B1F13] uppercase tracking-wider block">
                 ADMITTED EXPLORER
@@ -153,7 +142,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Event Schedule Reminders */}
-          <div className="my-8 p-6 sm:p-8 rounded-2xl bg-[#2C160B] text-[#F8F3E6] border border-[#CBA344] shadow-xl">
+          <div className="success-logistics my-6 p-5 sm:p-6 rounded-2xl bg-[#2C160B] text-[#F8F3E6] border border-[#CBA344] shadow-xl">
             <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C368] tracking-widest uppercase mb-4">
               EVENT LOGISTICS & VENUE BRIEFING
             </h4>
@@ -185,7 +174,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-between gap-5 pt-8 border-t-2 border-[#8B2616]/30">
+          <div className="success-actions flex flex-wrap items-center justify-between gap-4 pt-6 border-t-2 border-[#8B2616]/30">
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href={getGoogleCalendarUrl()}

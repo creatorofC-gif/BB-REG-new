@@ -2,19 +2,13 @@ import React, { useState, useRef } from "react";
 import { 
   CheckCircle2, 
   AlertCircle, 
-  Sparkles, 
-  User, 
-  Mail, 
-  Phone, 
-  GraduationCap, 
-  Compass, 
-  Building2 
+  Sparkles,
+  Compass
 } from "lucide-react";
-import { YEAR_OPTIONS, BRANCH_OPTIONS, EVENT_DETAILS } from "../config/constants";
+import { YEAR_OPTIONS, BRANCH_OPTIONS } from "../config/constants";
 import { validateRegistration } from "../services/googleSheets";
 import TearToSubmit from "./TearToSubmit";
-import GreekBorder from "./GreekBorder";
-import { sounds } from "../utils/audio";
+import ScrollReveal from "./ScrollReveal";
 
 export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
   const [formData, setFormData] = useState({
@@ -122,7 +116,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
       <div className="page-container flex flex-col items-center">
         
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <ScrollReveal className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-widest mb-4 shadow-lg">
             <Sparkles className="w-4 h-4 text-[#E5C368]" />
             <span>OFFICIAL REGISTRATION CHEQUE</span>
@@ -133,7 +127,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           <p className="font-cursive text-3xl sm:text-5xl text-[#E5C368] mt-3 max-w-xl mx-auto font-normal">
             Fill in your details and prepare to set sail.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Server Error Banner */}
         {serverError && (
@@ -148,7 +142,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
         )}
 
         {/* THE VINTAGE CHEQUE LEAF (Centered & Spacious on PC & Mobile) */}
-        <div 
+        <ScrollReveal
           className={`cheque-leaf security-pattern rounded-3xl p-7 sm:p-12 md:p-16 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
             shakeError ? "animate-shake ring-4 ring-red-600/50" : ""
           }`}
@@ -409,7 +403,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
               onTearComplete={handleTearComplete}
             />
           </form>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
