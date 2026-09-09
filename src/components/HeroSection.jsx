@@ -1,7 +1,6 @@
 import React from "react";
 import { Calendar, Clock, MapPin, ArrowDown, Navigation } from "lucide-react";
 import { EVENT_DETAILS } from "../config/constants";
-import BloomBoxCube from "./BloomBoxCube";
 import ScrollReveal from "./ScrollReveal";
 
 export function HeroSection({ onRegisterClick }) {
@@ -22,7 +21,7 @@ export function HeroSection({ onRegisterClick }) {
       <div className="hero-glow" aria-hidden="true" />
       <div className="page-container hero-content relative z-10 flex flex-col items-center text-center">
         <ScrollReveal delay={0} className="hero-logo" aria-label="BloomBox logo">
-          <BloomBoxCube className="w-32 h-32 sm:w-40 sm:h-40" />
+          <img src="/BloomBox_KJSCE-Logo-Small-White (2).png" alt="BloomBox Logo" className="w-32 h-32 sm:w-40 sm:h-40" />
         </ScrollReveal>
         <ScrollReveal delay={90}><p className="hero-presenter">BloomBox presents</p></ScrollReveal>
         <ScrollReveal delay={170}>

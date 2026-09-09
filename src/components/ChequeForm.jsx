@@ -130,25 +130,25 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
       <div className="page-container flex flex-col items-center">
         
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-10 sm:mb-14 pb-2">
+        <ScrollReveal className="text-center mb-8 sm:mb-12 flex flex-col items-center">
           <div 
-            className="inline-flex items-center gap-2.5 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-4 shadow-lg"
-            style={{ padding: "0.5rem 1.45rem" }}
+            className="inline-flex items-center gap-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-3 shadow-lg"
+            style={{ padding: "0.4rem 1.25rem" }}
           >
             <Sparkles className="w-4 h-4 text-[#E5C368] shrink-0" />
             <span>OFFICIAL REGISTRATION CHEQUE</span>
           </div>
-          <h2 className="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black text-[#F8F3E6] tracking-wide">
+          <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#F8F3E6] tracking-wide leading-tight">
             Make Your Commitment
           </h2>
-          <p className="font-cursive text-3xl sm:text-5xl text-[#E5C368] mt-3 max-w-xl mx-auto font-normal">
+          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] mt-1 max-w-xl mx-auto font-normal leading-snug">
             Fill in your details and prepare to set sail.
           </p>
         </ScrollReveal>
 
         {/* Server Error Banner */}
         {serverError && (
-          <div className="w-full max-w-4xl mb-10 p-5 rounded-2xl bg-[#561108]/95 border-2 border-[#E5C368] text-[#F8F3E6] shadow-2xl flex items-start gap-4 animate-shake">
+          <div className="w-full max-w-4xl mb-8 p-5 rounded-2xl bg-[#561108]/95 border-2 border-[#E5C368] text-[#F8F3E6] shadow-2xl flex items-start gap-4 animate-shake">
             <AlertCircle className="w-6 h-6 text-[#FF9955] shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-base font-cinzel text-[#FF9955]">SUBMISSION FAILED</h4>
@@ -165,7 +165,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           }`}
         >
           {/* Top Cheque Header */}
-          <div className="cheque-header-line flex flex-wrap items-center justify-between gap-5 border-b-2 border-[#8B2616]/30">
+          <div className="cheque-header-line flex flex-wrap items-center justify-between gap-5 border-b-2 border-[#8B2616]/30 pb-4 mb-6">
             
             {/* Bank Emblem & Branding */}
             <div className="flex items-center gap-4 sm:gap-6">

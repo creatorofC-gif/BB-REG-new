@@ -11,7 +11,6 @@
   --color-parchment-aged: #DFC99E;
   --color-deep-brown: #2C160B;
   --color-dark-maroon: #7B1F13;
-  --color-maroon-dark: #561108;
   --color-muted-gold: #CBA344;
   --color-gold-bright: #E5C368;
   --color-gold-dark: #9E7B26;
@@ -32,6 +31,9 @@
   --font-sans: "Times New Roman", Times, serif;
   --font-mono: "Times New Roman", Times, serif;
   --font-script: "Times New Roman", Times, serif;
+
+  /* Section Spacing */
+  --section-spacing: clamp(6rem, 10vw, 9rem);
 
   /* Shadows & Depth */
   --shadow-parchment: 0 10px 30px -5px rgba(28, 14, 5, 0.45), 0 0 0 1px rgba(199, 176, 131, 0.4);
@@ -114,16 +116,16 @@ body::after {
 /* Distinct Section Spacing - Even & Balanced */
 .section-hero {
   width: 100%;
-  padding-top: clamp(2.5rem, 6vw, 5.5rem);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+  margin: 0;
 }
 
 .section-storyline {
   width: 100%;
-  padding-top: clamp(3.5rem, 7vw, 6rem);
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
-  margin-top: 0;
-  margin-bottom: 0;
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+  margin: 0;
   border-top: 1px solid rgba(203, 163, 68, 0.2);
   border-bottom: 1px solid rgba(203, 163, 68, 0.2);
   background: radial-gradient(ellipse at 50% 50%, rgba(42, 22, 10, 0.55) 0%, transparent 80%);
@@ -131,30 +133,28 @@ body::after {
 
 .section-cheque {
   width: 100%;
-  padding-top: clamp(4rem, 7vw, 6rem);
-  padding-bottom: clamp(5rem, 9vw, 8rem);
-  margin-top: 0;
-  margin-bottom: 0;
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+  margin: 0;
 }
 
 @media (min-width: 768px) {
-  .section-hero {
-    padding-top: 6rem;
-    padding-bottom: 8rem;
+    .section-hero {
+      padding-top: var(--section-spacing);
+      padding-bottom: var(--section-spacing);
+      margin: 0;
+    }
+    .section-storyline {
+      padding-top: var(--section-spacing);
+      padding-bottom: var(--section-spacing);
+      margin: 0;
+    }
+    .section-cheque {
+      padding-top: var(--section-spacing);
+      padding-bottom: var(--section-spacing);
+      margin: 0;
+    }
   }
-  .section-storyline {
-    padding-top: 7rem;
-    padding-bottom: 8rem;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-  }
-  .section-cheque {
-    padding-top: 7.5rem;
-    padding-bottom: 11rem;
-    margin-top: 4rem;
-    margin-bottom: 5rem;
-  }
-}
 
 /* Centered Layout Wrapper */
 .page-container {
