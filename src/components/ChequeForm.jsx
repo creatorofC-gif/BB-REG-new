@@ -24,7 +24,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
   const [shakeError, setShakeError] = useState(false);
   const [currentDate, setCurrentDate] = useState(() => new Date());
 
-  // Keep the cheque date current, including if the page remains open overnight.
   useEffect(() => {
     const updateDate = () => setCurrentDate(new Date());
     const intervalId = window.setInterval(updateDate, 60_000);
@@ -37,7 +36,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     String(currentDate.getFullYear())
   ];
 
-  // Field refs for auto-focus on error
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const contactRef = useRef(null);
@@ -57,7 +55,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     
     let processedValue = value;
     if (name === "contact") {
-      // Allow only digits, max 10
       processedValue = value.replace(/\D/g, "").slice(0, 10);
     }
 
@@ -66,7 +63,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
       [name]: processedValue
     }));
 
-    // Real-time re-validation for touched field
     if (touched[name]) {
       const nextData = { ...formData, [name]: processedValue };
       const validation = validateRegistration(nextData);
@@ -87,7 +83,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     }));
   };
 
-  // Pre-tear validation check
   const validateFormBeforeTear = () => {
     const validation = validateRegistration(formData);
     setTouched({
@@ -103,7 +98,6 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
       setShakeError(true);
       setTimeout(() => setShakeError(false), 450);
 
-      // Auto-scroll to first invalid input
       const firstErrorField = Object.keys(validation.errors)[0];
       if (firstErrorField && fieldRefs[firstErrorField]?.current) {
         fieldRefs[firstErrorField].current.focus();
@@ -120,17 +114,16 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     }
   };
 
-  // Check validity statuses
   const isSomaiyaEmailValid = formData.email && /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/i.test(formData.email.trim());
   const isPhoneValid = formData.contact && formData.contact.length === 10;
   const isNameValid = formData.fullName && formData.fullName.trim().length >= 2;
 
   return (
-    <section id="registration-cheque" className="section-cheque relative flex flex-col items-center justify-center z-20">
-      <div className="page-container flex flex-col items-center">
+    <section id="registration-cheque" className="section-cheque relative flex flex-col items-center justify-center z-20 pt-10 pb-16 px-4">
+      <div className="page-container flex flex-col items-center w-full max-w-4xl">
         
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-8 sm:mb-12 flex flex-col items-center">
+        <ScrollReveal className="text-center mb-8 flex flex-col items-center">
           <div 
             className="inline-flex items-center gap-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-3 shadow-lg"
             style={{ padding: "0.4rem 1.25rem" }}
@@ -138,61 +131,61 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
             <Sparkles className="w-4 h-4 text-[#E5C368] shrink-0" />
             <span>OFFICIAL REGISTRATION CHEQUE</span>
           </div>
-          <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#F8F3E6] tracking-wide leading-tight">
+
+          <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#F8F3E6] tracking-wide leading-tight mb-2">
             Make Your Commitment
           </h2>
-          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] mt-1 max-w-xl mx-auto font-normal leading-snug">
+
+          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] max-w-xl mx-auto font-normal leading-snug">
             Fill in your details and prepare to set sail.
           </p>
         </ScrollReveal>
 
         {/* Server Error Banner */}
         {serverError && (
-          <div className="w-full max-w-4xl mb-8 p-5 rounded-2xl bg-[#561108]/95 border-2 border-[#E5C368] text-[#F8F3E6] shadow-2xl flex items-start gap-4 animate-shake">
-            <AlertCircle className="w-6 h-6 text-[#FF9955] shrink-0 mt-0.5" />
+          <div className="w-full mb-6 p-4 rounded-xl bg-[#561108]/95 border-2 border-[#E5C368] text-[#F8F3E6] shadow-2xl flex items-start gap-3 animate-shake">
+            <AlertCircle className="w-5 h-5 text-[#FF9955] shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-base font-cinzel text-[#FF9955]">SUBMISSION FAILED</h4>
-              <p className="text-sm mt-1 text-[#DFC99E]">{serverError}</p>
-              <p className="text-xs text-[#DFC99E]/80 mt-1">Your details have been preserved. Please retry the tear.</p>
+              <h4 className="font-bold text-sm font-cinzel text-[#FF9955]">SUBMISSION FAILED</h4>
+              <p className="text-xs mt-0.5 text-[#DFC99E]">{serverError}</p>
             </div>
           </div>
         )}
 
-        {/* THE VINTAGE CHEQUE LEAF (Centered & Spacious on PC & Mobile) */}
+        {/* THE VINTAGE CHEQUE LEAF */}
         <ScrollReveal
-          className={`cheque-leaf security-pattern rounded-3xl p-8 sm:p-12 md:p-16 shadow-3xl relative overflow-hidden transition-all max-w-4xl w-full ${
+          className={`cheque-leaf security-pattern rounded-2xl p-6 sm:p-10 md:p-12 shadow-3xl relative overflow-hidden transition-all w-full ${
             shakeError ? "animate-shake ring-4 ring-red-600/50" : ""
           }`}
         >
           {/* Top Cheque Header */}
-          <div className="cheque-header-line flex flex-wrap items-center justify-between gap-5 border-b-2 border-[#8B2616]/30 pb-4 mb-6">
+          <div className="cheque-header-line flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-[#8B2616]/30 pb-5 mb-8">
             
             {/* Bank Emblem & Branding */}
-            <div className="flex items-center gap-4 sm:gap-6">
-              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#8B2616] border-2 border-[#CBA344] flex items-center justify-center text-[#E5C368] shrink-0 shadow-2xl">
-                <Compass className="w-8 h-8 sm:w-11 sm:h-11 animate-compass" />
+            <div className="flex items-center gap-3.5 sm:gap-4">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#8B2616] border border-[#CBA344] flex items-center justify-center text-[#E5C368] shrink-0 shadow-lg">
+                <Compass className="w-7 h-7 sm:w-9 sm:h-9 animate-compass" />
               </div>
               <div>
-                <div className="text-xl sm:text-3xl font-cinzel font-black tracking-wide text-[#2C160B]">
+                <div className="text-lg sm:text-2xl font-cinzel font-black tracking-wide text-[#2C160B] leading-tight">
                   REGISTER NOW
                 </div>
-                <div className="text-xs text-[#5C4736] font-mono mt-1">
+                <div className="text-[11px] sm:text-xs text-[#5C4736] font-mono mt-0.5">
                   BRANCH: KJSCE • ROOM B-113 • MUMBAI
                 </div>
               </div>
             </div>
 
             {/* Vintage Boxed Date */}
-            <div className="cheque-date-container flex flex-col items-start sm:items-end gap-2.5 sm:ml-auto">
-              {/* Live date boxes (DD / MM / YYYY) */}
-              <div className="flex items-center gap-1 sm:gap-1.5 mt-1">
-                <span className="text-xs font-mono font-bold text-[#5C4736] mr-1">DATE:</span>
+            <div className="cheque-date-container flex items-center gap-1.5 ml-auto sm:ml-0">
+              <span className="text-xs font-mono font-bold text-[#5C4736] mr-1">DATE:</span>
+              <div className="flex items-center gap-1">
                 <span className="date-box">{dateDigits[0][0]}</span>
                 <span className="date-box">{dateDigits[0][1]}</span>
-                <span className="text-sm font-bold text-[#5C4736]">/</span>
+                <span className="text-xs font-bold text-[#5C4736]">/</span>
                 <span className="date-box">{dateDigits[1][0]}</span>
                 <span className="date-box">{dateDigits[1][1]}</span>
-                <span className="text-sm font-bold text-[#5C4736]">/</span>
+                <span className="text-xs font-bold text-[#5C4736]">/</span>
                 {dateDigits[2].split("").map((digit, index) => (
                   <span className="date-box" key={index}>{digit}</span>
                 ))}
@@ -201,86 +194,84 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           </div>
 
           {/* CHEQUE FORM FIELDS */}
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-7 sm:space-y-9 mb-4" noValidate>
+          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-7 sm:gap-8 mb-6" noValidate>
             
             {/* FIELD 1: FULL NAME */}
-            <div className="cheque-field-first relative">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4">
-                <label 
-                  htmlFor="fullName" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
-                >
-                  REGISTER TO THE ORDER OF:
-                </label>
-                <div className="flex-1 relative">
-                  <input
-                    ref={nameRef}
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="Full Name of Student (First & Last Name)"
-                    className={`cheque-input pr-10 ${errors.fullName ? "has-error" : ""}`}
-                    autoComplete="name"
-                    required
-                  />
-                  {isNameValid && (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-2 top-3.5" />
-                  )}
-                </div>
+            <div className="flex flex-col gap-2">
+              <label 
+                htmlFor="fullName" 
+                className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
+              >
+                REGISTER TO THE ORDER OF:
+              </label>
+              <div className="relative">
+                <input
+                  ref={nameRef}
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`cheque-input min-h-[42px] py-2 pr-8 w-full text-base font-serif bg-transparent border-b-2 border-[#8B2616]/40 focus:outline-none focus:border-[#8B2616] ${
+                    errors.fullName ? "has-error" : ""
+                  }`}
+                  autoComplete="name"
+                  required
+                />
+                {isNameValid && (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-1 bottom-3" />
+                )}
               </div>
               {errors.fullName && (
-                <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
-                  <AlertCircle className="w-4 h-4" /> {errors.fullName}
+                <p className="text-xs text-red-700 font-semibold mt-1 flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" /> {errors.fullName}
                 </p>
               )}
             </div>
 
             {/* FIELD 2: SOMAIYA EMAIL ID */}
-            <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                <label 
-                  htmlFor="email" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider shrink-0"
-                >
-                  SOMAIYA EMAIL ID:
-                </label>
-                <div className="flex-1 relative">
-                  <input
-                    ref={emailRef}
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="student.name@somaiya.edu"
-                    className={`cheque-input pr-10 ${errors.email ? "has-error" : ""}`}
-                    autoComplete="email"
-                    required
-                  />
-                  {isSomaiyaEmailValid && (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-2 top-3.5" />
-                  )}
-                </div>
+            <div className="flex flex-col gap-2">
+              <label 
+                htmlFor="email" 
+                className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
+              >
+                SOMAIYA EMAIL ID:
+              </label>
+              <div className="relative">
+                <input
+                  ref={emailRef}
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`cheque-input min-h-[42px] py-2 pr-8 w-full text-base font-serif bg-transparent border-b-2 border-[#8B2616]/40 focus:outline-none focus:border-[#8B2616] ${
+                    errors.email ? "has-error" : ""
+                  }`}
+                  autoComplete="email"
+                  required
+                />
+                {isSomaiyaEmailValid && (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-1 bottom-3" />
+                )}
               </div>
               {errors.email && (
-                <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
-                  <AlertCircle className="w-4 h-4" /> {errors.email}
+                <p className="text-xs text-red-700 font-semibold mt-1 flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
                 </p>
               )}
             </div>
 
             {/* TWO COLUMN ROW: CONTACT NUMBER & YEAR OF STUDY */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8">
               
-              {/* FIELD 3: CONTACT NUMBER (10 Digits) */}
-              <div className="relative">
+              {/* FIELD 3: CONTACT NUMBER */}
+              <div className="flex flex-col gap-2">
                 <label 
                   htmlFor="contact" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider block mb-2"
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
                 >
                   CONTACT NUMBER (10 DIGITS):
                 </label>
@@ -294,94 +285,105 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                     value={formData.contact}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="9876543210"
-                    className={`cheque-input pr-10 font-mono ${errors.contact ? "has-error" : ""}`}
+                    className={`cheque-input min-h-[42px] py-2 pr-8 w-full text-base font-mono bg-transparent border-b-2 border-[#8B2616]/40 focus:outline-none focus:border-[#8B2616] ${
+                      errors.contact ? "has-error" : ""
+                    }`}
                     autoComplete="tel"
                     required
                   />
                   {isPhoneValid && (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-2 top-3.5" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-700 absolute right-1 bottom-3" />
                   )}
                 </div>
                 {errors.contact && (
-                  <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
-                    <AlertCircle className="w-4 h-4" /> {errors.contact}
+                  <p className="text-xs text-red-700 font-semibold mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5" /> {errors.contact}
                   </p>
                 )}
               </div>
 
               {/* FIELD 4: YEAR OF STUDY */}
-              <div className="relative">
+              <div className="flex flex-col gap-2">
                 <label 
                   htmlFor="year" 
-                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider block mb-2"
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
                 >
                   YEAR OF STUDY:
                 </label>
-                <select
-                  ref={yearRef}
-                  id="year"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`cheque-select ${errors.year ? "has-error" : ""}`}
-                  required
-                >
-                  <option value="">-- Select Year of Study --</option>
-                  {YEAR_OPTIONS.map((yr) => (
-                    <option key={yr} value={yr}>
-                      {yr}
-                    </option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    ref={yearRef}
+                    id="year"
+                    name="year"
+                    value={formData.year}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`cheque-select min-h-[42px] py-2 w-full text-base font-serif bg-transparent border-b-2 border-[#8B2616]/40 focus:outline-none focus:border-[#8B2616] ${
+                      errors.year ? "has-error" : ""
+                    }`}
+                    required
+                  >
+                    <option value="">-- Select Year of Study --</option>
+                    {YEAR_OPTIONS.map((yr) => (
+                      <option key={yr} value={yr}>
+                        {yr}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {errors.year && (
-                  <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
-                    <AlertCircle className="w-4 h-4" /> {errors.year}
+                  <p className="text-xs text-red-700 font-semibold mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5" /> {errors.year}
                   </p>
                 )}
               </div>
             </div>
 
             {/* FIELD 5: COLLEGE / ENGINEERING BRANCH */}
-            <div className="relative">
+            <div className="flex flex-col gap-2">
               <label 
                 htmlFor="branch" 
-                className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider block mb-2"
+                className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
               >
                 COLLEGE / ENGINEERING BRANCH:
               </label>
-              <select
-                ref={branchRef}
-                id="branch"
-                name="branch"
-                value={formData.branch}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={`cheque-select ${errors.branch ? "has-error" : ""}`}
-                required
-              >
-                <option value="">-- Select Your Branch --</option>
-                {BRANCH_OPTIONS.map((br) => (
-                  <option key={br} value={br}>
-                    {br}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  ref={branchRef}
+                  id="branch"
+                  name="branch"
+                  value={formData.branch}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`cheque-select min-h-[42px] py-2 w-full text-base font-serif bg-transparent border-b-2 border-[#8B2616]/40 focus:outline-none focus:border-[#8B2616] ${
+                    errors.branch ? "has-error" : ""
+                  }`}
+                  required
+                >
+                  <option value="">-- Select Your Branch --</option>
+                  {BRANCH_OPTIONS.map((br) => (
+                    <option key={br} value={br}>
+                      {br}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {errors.branch && (
-                <p className="text-xs sm:text-sm text-red-700 font-semibold mt-2 flex items-center gap-1 font-sans">
-                  <AlertCircle className="w-4 h-4" /> {errors.branch}
+                <p className="text-xs text-red-700 font-semibold mt-1 flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" /> {errors.branch}
                 </p>
               )}
             </div>
 
-            {/* SIGNATURE TEAR-TO-SUBMIT PERFORATED COMPONENT */}
-            <TearToSubmit
-              isValid={Object.keys(errors).length === 0}
-              isSubmitting={isSubmitting}
-              onValidateBeforeTear={validateFormBeforeTear}
-              onTearComplete={handleTearComplete}
-            />
+            {/* TEAR-TO-SUBMIT PERFORATED COMPONENT */}
+            <div className="pt-4">
+              <TearToSubmit
+                isValid={Object.keys(errors).length === 0}
+                isSubmitting={isSubmitting}
+                onValidateBeforeTear={validateFormBeforeTear}
+                onTearComplete={handleTearComplete}
+              />
+            </div>
           </form>
         </ScrollReveal>
       </div>
