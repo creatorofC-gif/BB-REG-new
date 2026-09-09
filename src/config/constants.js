@@ -5,10 +5,10 @@
  * Replace the string below with your deployed Google Apps Script Web App URL.
  * Example: "https://script.google.com/macros/s/AKfycbx.../exec"
  */
-export const GOOGLE_APPS_SCRIPT_URL = 
-  (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL) 
-    ? import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL 
-    : "https://script.google.com/macros/s/AKfycbyuOv5cfnzZV3dGXJqG2nE10UUh7pgGW0xO8vwrgrXZMKEjXZMXgX8T2fndtaNY3jE/exec";
+export const GOOGLE_APPS_SCRIPT_URL =
+  (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL)
+    ? import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL
+    : "https://script.google.com/macros/s/AKfycbyzzyisDPUzXmTwL9l249yu3mCfLZqKJQwMB3UE3gjbc51EcfzYvqd_H3NdmM4w7hEv/exec";
 
 /**
  * HERO ARTWORK / POSTER IMAGE PATH
@@ -16,7 +16,7 @@ export const GOOGLE_APPS_SCRIPT_URL =
  * and set its filename here (e.g. "/hero-boat.png").
  * If left empty or null, the built-in SVG vector artwork template will be rendered.
  */
-export const CUSTOM_HERO_IMAGE = ""; 
+export const CUSTOM_HERO_IMAGE = "";
 
 export const EVENT_DETAILS = {
   name: "ConnectiFY'26",

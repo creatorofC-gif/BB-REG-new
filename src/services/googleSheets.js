@@ -1,6 +1,6 @@
 // Google Apps Script integration service
 
-import { GOOGLE_APPS_SCRIPT_URL, EVENT_DETAILS } from "../config/constants";
+import { EVENT_DETAILS } from "../config/constants";
 
 /**
  * Validates registration data before transmission
@@ -46,7 +46,7 @@ export function validateRegistration(formData) {
 }
 
 /**
- * Submits registration payload to Google Apps Script Web App
+ * Submits registration payload to our backend API (which sends email and saves to Google Sheets)
  */
 export async function submitRegistration(formData) {
   const validation = validateRegistration(formData);
@@ -68,48 +68,16 @@ export async function submitRegistration(formData) {
     branch: formData.branch.trim()
   };
 
-  // Detect temporary echo URLs vs permanent Web App deployment URLs
-  const isEchoUrl = GOOGLE_APPS_SCRIPT_URL.includes("script.googleusercontent.com/macros/echo");
-  if (isEchoUrl) {
-    console.error(
-      "❌ Invalid Apps Script URL: You have provided a temporary browser echo redirect URL.\n" +
-      "Please copy the official Web App URL from Apps Script editor (Deploy > Manage deployments).\n" +
-      "It must look like: https://script.google.com/macros/s/AKfycbx.../exec"
-    );
-    return {
-      success: false,
-      error: "Temporary Google echo URL provided",
-      message: "Configuration Error: Please use the official Web App URL ending in /exec from Google Apps Script (Deploy > Manage deployments)."
-    };
-  }
-
-  // Check if user has configured a valid Apps Script URL
-  const isUrlConfigured =
-    GOOGLE_APPS_SCRIPT_URL &&
-    GOOGLE_APPS_SCRIPT_URL !== "PASTE_YOUR_APPS_SCRIPT_URL_HERE" &&
-    GOOGLE_APPS_SCRIPT_URL.startsWith("https://script.google.com/macros/s/");
-
-  if (!isUrlConfigured) {
-    console.warn(
-      "⚠️ Google Apps Script URL not configured yet. Simulating successful registration for preview.\n" +
-      "To connect live Google Sheets, paste your deployed Web App URL into src/config/constants.js or .env"
-    );
-    // Simulate network latency
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    return {
-      success: true,
-      data: payload,
-      isSimulated: true,
-      message: "Registration completed (Preview Mode - configure Google Apps Script URL to save to live sheet)"
-    };
-  }
+  // Get backend URL from environment variable
+  const apiUrl = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL)
+    ? import.meta.env.VITE_API_URL
+    : "http://localhost:5000/api/register"; // Default for development
 
   try {
-    // Send payload as text/plain to avoid CORS preflight OPTIONS blocking
-    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
     });
@@ -118,24 +86,24 @@ export async function submitRegistration(formData) {
     let result;
     try {
       result = JSON.parse(responseText);
-    } catch {
-      throw new Error("Server returned non-JSON response. Please check Apps Script deployment permissions (Must be set to 'Anyone').");
+    } catch (e) {
+      throw new Error("Server returned non-JSON response");
     }
 
     if (result && result.status === "success") {
       return {
         success: true,
         data: payload,
-        message: result.message || "Your response has been submitted successfully."
+        message: result.message || "Registration successful! Confirmation email has been sent."
       };
     } else {
       throw new Error(result?.message || "Server returned unsuccessful status");
     }
   } catch (error) {
-    console.error("Google Sheets submission error:", error);
+    console.error("Submission error:", error);
     return {
       success: false,
-      error: error.message || "Failed to reach Google Sheets endpoint",
+      error: error.message || "Failed to reach backend endpoint",
       message: error.message || "Something went wrong while processing your registration. Please try again."
     };
   }
