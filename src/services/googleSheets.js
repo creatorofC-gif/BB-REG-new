@@ -68,10 +68,10 @@ export async function submitRegistration(formData) {
     branch: formData.branch.trim()
   };
 
-  // Get backend URL from environment variable
+  // Get backend URL from environment variable (defaults to relative /api/register on Vercel)
   const apiUrl = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_URL)
     ? import.meta.env.VITE_API_URL
-    : "http://localhost:5000/api/register"; // Default for development
+    : "/api/register";
 
   try {
     const response = await fetch(apiUrl, {
