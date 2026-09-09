@@ -41,11 +41,7 @@ export const WAYPOINTS = [
 ];
 
 export const YEAR_OPTIONS = [
-  "First Year",
-  "Second Year",
-  "Third Year",
-  "Fourth Year",
-  "Other"
+  "First Year"
 ];
 
 export const BRANCH_OPTIONS = [
