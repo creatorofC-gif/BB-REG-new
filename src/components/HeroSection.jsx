@@ -20,12 +20,26 @@ export function HeroSection({ onRegisterClick }) {
     <section className="section-hero relative flex flex-col items-center justify-center">
       <div className="hero-glow" aria-hidden="true" />
       <div className="page-container hero-content relative z-10 flex flex-col items-center text-center">
-        <ScrollReveal delay={0} className="hero-logo" aria-label="BloomBox logo">
-          <img src="/BloomBox_KJSCE-Logo-Small-White (2).png" alt="BloomBox Logo" className="w-32 h-32 sm:w-40 sm:h-40" />
+        
+        {/* BloomBox Logo */}
+        <ScrollReveal delay={0} className="hero-logo flex flex-col items-center justify-center" aria-label="BloomBox logo">
+          <img 
+            src="/BloomBox_KJSCE-Logo-Small-White (2).png" 
+            alt="BloomBox Logo" 
+            className="w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-[0_8px_20px_rgba(200,90,23,0.35)] transition-transform duration-300 hover:scale-105" 
+          />
         </ScrollReveal>
-        <ScrollReveal delay={90}><p className="hero-presenter">BloomBox presents</p></ScrollReveal>
-        <ScrollReveal delay={170}>
-          <h1 className="hero-title hero-title-compass">
+
+        {/* Presenter Subtitle */}
+        <ScrollReveal delay={80}>
+          <p className="hero-presenter font-serif tracking-[0.25em] text-[#E5C368] font-bold text-xs sm:text-sm uppercase">
+            BloomBox presents
+          </p>
+        </ScrollReveal>
+
+        {/* Main Event Title with Vintage Compass O */}
+        <ScrollReveal delay={160}>
+          <h1 className="hero-title hero-title-compass select-none">
             <span>C</span>
             <span className="title-compass" aria-label="O">
               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -118,14 +132,20 @@ export function HeroSection({ onRegisterClick }) {
             <span>NNECTIFY</span><sup>'26</sup>
           </h1>
         </ScrollReveal>
-        <ScrollReveal delay={250} className="text-center flex flex-col items-center w-full">
+
+        {/* Tagline */}
+        <ScrollReveal delay={240} className="text-center flex flex-col items-center w-full">
           <p className="hero-tagline text-center mx-auto">{EVENT_DETAILS.tagline}</p>
         </ScrollReveal>
-        <ScrollReveal delay={330} className="hero-introduction">
+
+        {/* Introduction Paragraph */}
+        <ScrollReveal delay={320} className="hero-introduction">
           <h2>{EVENT_DETAILS.heroHeadline}</h2>
           <p>{EVENT_DETAILS.subtext}</p>
         </ScrollReveal>
-        <ScrollReveal delay={410} className="event-details" aria-label="Event details">
+
+        {/* Event Detail Badges */}
+        <ScrollReveal delay={400} className="event-details" aria-label="Event details">
           {details.map(({ label, value, Icon }) => (
             <div className="event-detail" key={label}>
               <Icon aria-hidden="true" />
@@ -133,13 +153,16 @@ export function HeroSection({ onRegisterClick }) {
             </div>
           ))}
         </ScrollReveal>
-        <ScrollReveal delay={490}>
+
+        {/* Primary Call to Action Button */}
+        <ScrollReveal delay={480} className="pt-2">
           <a href="#registration-cheque" onClick={handleCtaClick} className="btn-vintage hero-cta">
             <Navigation className="w-5 h-5 rotate-45 shrink-0" aria-hidden="true" />
             <span>Begin your journey — register now</span>
             <ArrowDown className="w-5 h-5 shrink-0" aria-hidden="true" />
           </a>
         </ScrollReveal>
+
       </div>
     </section>
   );

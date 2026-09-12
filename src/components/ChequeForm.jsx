@@ -119,24 +119,22 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
   const isNameValid = formData.fullName && formData.fullName.trim().length >= 2;
 
   return (
-    <section id="registration-cheque" className="section-cheque relative flex flex-col items-center justify-center z-20 pt-10 pb-16 px-4">
+    <section id="registration-cheque" className="section-cheque relative flex flex-col items-center justify-center z-20">
       <div className="page-container flex flex-col items-center w-full max-w-4xl">
         
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-8 flex flex-col items-center">
+        <ScrollReveal className="text-center mb-10 sm:mb-14 flex flex-col items-center w-full">
           <div 
-            className="inline-flex items-center gap-2 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-wider mb-3 shadow-lg"
-            style={{ padding: "0.4rem 1.25rem" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8B2616]/45 border border-[#CBA344]/60 text-[#E5C368] text-xs font-mono uppercase tracking-[0.2em] font-bold mb-4 shadow-lg justify-center"
           >
-            <Sparkles className="w-4 h-4 text-[#E5C368] shrink-0" />
-            <span>OFFICIAL REGISTRATION CHEQUE</span>
+            
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#F8F3E6] tracking-wide leading-tight mb-2">
+          <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#F8F3E6] tracking-wide leading-tight mt-1 mb-3 text-center">
             Make Your Commitment
           </h2>
 
-          <p className="font-cursive text-2xl sm:text-4xl text-[#E5C368] max-w-xl mx-auto font-normal leading-snug">
+          <p className="font-cursive text-xl sm:text-3xl text-[#DFC99E] max-w-xl mx-auto font-normal leading-relaxed text-center">
             Fill in your details and prepare to set sail.
           </p>
         </ScrollReveal>

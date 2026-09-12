@@ -33,11 +33,36 @@ export const EVENT_DETAILS = {
 };
 
 export const WAYPOINTS = [
-  { step: "01", name: "IDEATE", desc: "Discover market sparks & student ventures" },
-  { step: "02", name: "INNOVATE", desc: "Craft bold solutions beyond conventions" },
-  { step: "03", name: "VALIDATE", desc: "Test hypotheses with mentors & real users" },
-  { step: "04", name: "STRATEGIZE", desc: "Build sustainable models & team synergy" },
-  { step: "05", name: "LAUNCH", desc: "Sail into the startup ecosystem" }
+  { 
+    step: "01", 
+    name: "Build Your Professional Identity", 
+    desc: "Master genuine networking, optimize your LinkedIn, craft a standout portfolio, and present yourself with confidence." 
+  },
+  { 
+    step: "02", 
+    name: "AI as a Tool, Not a Shortcut", 
+    desc: "Leverage modern AI productively for accelerated learning, project ideation, deep research, and career breakthroughs." 
+  },
+  { 
+    step: "03", 
+    name: "Engineer, Entrepreneur — or Both?", 
+    desc: "Bridge technical engineering prowess with entrepreneurial vision to build high-impact real-world products." 
+  },
+  { 
+    step: "04", 
+    name: "Everyday Observations → Opportunities", 
+    desc: "Train your founder lens to spot hidden market friction and transform everyday frustrations into viable ventures." 
+  },
+  { 
+    step: "05", 
+    name: "From Problem to Product", 
+    desc: "Deconstruct problems, validate with real users, isolate core MVP features, and engineer working prototypes." 
+  },
+  { 
+    step: "06", 
+    name: "Gamified Round: The Startup Quest", 
+    desc: "A fast-paced team challenge solving clues, cracking live problem statements, and pitching creative solutions to mentors." 
+  }
 ];
 
 export const YEAR_OPTIONS = [
