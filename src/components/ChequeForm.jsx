@@ -200,7 +200,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                 htmlFor="fullName" 
                 className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
               >
-                REGISTER TO THE ORDER OF:
+                NAME:
               </label>
               <div className="relative">
                 <input
