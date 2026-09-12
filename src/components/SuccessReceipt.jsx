@@ -75,7 +75,7 @@ export function SuccessReceipt({ registrationData, onReset }) {
               <Compass className="w-10 h-10 text-[#C85A17] animate-compass" />
               <div>
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#8B2616] block">
-                  OFFICIAL VOYAGE PASS & PROCESSED CHEQUE
+                  OFFICIAL VOYAGE PASS
                 </span>
                 <h3 className="font-cinzel text-2xl sm:text-4xl font-black text-[#2C160B]">
                   CONNECTIFY'26

@@ -145,7 +145,12 @@ app.post('/api/register', async (req, res) => {
     try {
       result = JSON.parse(responseText);
     } catch (e) {
-      throw new Error('Server returned non-JSON response from Google Apps Script');
+      console.error('❌ Non-JSON response received from Google Apps Script. Raw response preview:');
+      console.error(responseText.slice(0, 300));
+      if (responseText.includes('accounts.google.com') || responseText.includes('Sign in') || responseText.includes('<!DOCTYPE html>')) {
+        throw new Error('Google Apps Script access is restricted. In Apps Script, set "Who has access" to "Anyone" and redeploy.');
+      }
+      throw new Error('Google Apps Script returned an invalid (non-JSON) response.');
     }
 
     if (result && result.status === 'success') {
