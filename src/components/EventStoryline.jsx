@@ -8,7 +8,6 @@ import {
   Lightbulb, 
   Rocket, 
   Trophy, 
-  Ship,
   ChevronRight,
   Star
 } from "lucide-react";
@@ -63,8 +62,8 @@ export function EventStoryline() {
     };
   }, []);
 
-  // Compute boat vertical position percentage
-  const boatTopPercent = Math.min(95, Math.max(5, scrollProgress * 100));
+  // Keep the flowing timeline light within the route bounds.
+  const lightProgressPercent = Math.min(95, Math.max(5, scrollProgress * 100));
 
   return (
     <section className="section-storyline relative flex flex-col items-center justify-center z-10 py-20 sm:py-28 lg:py-36 overflow-hidden">
@@ -84,7 +83,7 @@ export function EventStoryline() {
 
         {/* Nautical Voyage Timeline */}
         <div ref={containerRef} className="relative w-full flex flex-col items-center">
-            
+
           <div className="hidden lg:block relative w-full">
             {/* Central Meridian Line */}
             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-transparent via-[#CBA344]/40 to-[#CBA344]/20 pointer-events-none" />
@@ -92,21 +91,10 @@ export function EventStoryline() {
             {/* Active Progress Gold Line */}
             <div 
               className="absolute top-0 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-[#C85A17] via-[#E5C368] to-[#FF9955] shadow-[0_0_15px_rgba(229,195,104,0.6)] transition-all duration-300 pointer-events-none"
-              style={{ height: `${boatTopPercent}%` }}
+              style={{ height: `${lightProgressPercent}%` }}
             />
 
-            {/* Sailing Ship with Navigation Compass Ring */}
-            <div 
-              className="absolute left-1/2 -translate-x-1/2 z-20 transition-all duration-300 ease-out pointer-events-none"
-              style={{ top: `${boatTopPercent}%`, transform: 'translate(-50%, -50%)' }}
-            >
-              <div className="relative flex items-center justify-center">
-                <div className="absolute w-16 h-16 rounded-full bg-[#E5C368]/20 animate-ping" />
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#8B2616] via-[#5C1408] to-[#2C0A04] border-2 border-[#FFD700] flex items-center justify-center text-[#FFE8A3] shadow-[0_8px_25px_rgba(0,0,0,0.6),0_0_20px_rgba(229,195,104,0.5)]">
-                  <Ship className="w-7 h-7 animate-ship-float" />
-                </div>
-              </div>
-            </div>
+           
 
             {/* Desktop 5 Waypoint Cards with Spacious Gaps */}
             <div className="w-full flex flex-col gap-24 lg:gap-28">
