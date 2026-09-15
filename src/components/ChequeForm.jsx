@@ -169,7 +169,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                   REGISTER NOW
                 </div>
                 <div className="text-[11px] sm:text-xs text-[#5C4736] font-mono mt-0.5">
-                  BRANCH: KJSCE • ROOM B-113 • MUMBAI
+                   KJSSE • ROOM B-113 •
                 </div>
               </div>
             </div>
@@ -343,7 +343,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
                 htmlFor="branch" 
                 className="font-cinzel text-xs sm:text-sm font-bold text-[#7B1F13] tracking-wider"
               >
-                COLLEGE / ENGINEERING BRANCH:
+                BRANCH:
               </label>
               <div className="relative">
                 <select
