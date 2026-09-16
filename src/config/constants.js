@@ -77,6 +77,6 @@ export const BRANCH_OPTIONS = [
   "Electronics Engineering",
   "Mechanical Engineering",
   "Civil Engineering",
-  "Chemical Engineering",
-  "Other"
+  "Chemical Engineering"
 ];
+
