@@ -79,7 +79,8 @@ export const BRANCH_OPTIONS = [
   "Computer Science and Buisness Systems",
   "Computer and Communication Engineering",
   "Robotics and Artificial Intelligence",
-  "VLSI Design and Technology"
+  "VLSI Design and Technology",
+  "Civil Engineering"
 
 ];
 
