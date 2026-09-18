@@ -26,21 +26,17 @@ A production-ready, mobile-first and desktop-responsive event registration websi
    - 10-digit phone number validation with real-time checkmarks.
    - Academic year and engineering branch dropdowns.
 
-3. **Tactile Perforated Cheque-Tear Interaction**:
-   - Physical swipe/drag downward along the perforated tear line on Mobile and PC.
-   - Synthetic Web Audio API realistic paper tear crackle sound (zero external audio dependencies).
+3. **Vintage Cheque Endorsement & Submit**:
+   - Mastercrafted vintage submit button with gold accents, rich typography, and interactive hover/active states.
+   - Comprehensive pre-submission validation with visual error indicators and smooth auto-scroll to invalid fields.
+   - Accessible keyboard submission (`Enter` key support across all inputs) and screen reader support.
    - Haptic vibration feedback on supported mobile devices.
-   - Form validation pre-check preventing tearing if fields are missing, with smooth auto-scroll to the first invalid field.
-   - Accessible keyboard trigger (hold Space/Enter or accessible submit trigger).
+   - Real-time loading indicator preventing duplicate submissions.
 
 4. **Official Stamped Confirmation**:
-   - Post-tear wax seal / "OFFICIALLY ADMITTED" stamp animation.
+   - Official wax seal / "OFFICIALLY ADMITTED" stamp animation.
    - Admitted explorer voyage receipt with event logistics.
    - Confirmation email sent to the submitted Somaiya email address.
-   - Printable / saveable pass button.
-   - Gold & terracotta confetti burst.
-
----
 
 ## 🚀 Getting Started
 

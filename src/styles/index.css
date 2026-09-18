@@ -361,46 +361,6 @@ body::after {
   user-select: none;
 }
 
-/* Perforation Tear Line */
-.tear-perforation {
-  position: relative;
-  width: 100%;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0 10px 0;
-}
-
-.tear-line-dashed {
-  width: 100%;
-  height: 2px;
-  border-top: 2.5px dashed rgba(123, 31, 19, 0.55);
-}
-
-/* Left & Right Notches */
-.tear-notch-left {
-  position: absolute;
-  left: -2px;
-  width: 16px;
-  height: 28px;
-  background-color: var(--color-parchment-bg);
-  border-radius: 0 14px 14px 0;
-  border: 2px solid var(--color-border-parchment);
-  border-left: none;
-}
-
-.tear-notch-right {
-  position: absolute;
-  right: -2px;
-  width: 16px;
-  height: 28px;
-  background-color: var(--color-parchment-bg);
-  border-radius: 14px 0 0 14px;
-  border: 2px solid var(--color-border-parchment);
-  border-right: none;
-}
-
 /* Wax Seal & Stamp */
 .registered-stamp {
   border: 4px double var(--color-dark-maroon);
@@ -466,16 +426,6 @@ body::after {
 
 .animate-ship-float {
   animation: gentleWave 6s ease-in-out infinite;
-}
-
-@keyframes tearSeparate {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  40% { transform: translateY(22px) rotate(1.5deg); opacity: 0.95; }
-  100% { transform: translateY(90px) rotate(4deg); opacity: 0; }
-}
-
-.animate-torn-away {
-  animation: tearSeparate 0.65s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
 }
 
 @keyframes stampSlam {

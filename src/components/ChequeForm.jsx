@@ -3,11 +3,12 @@ import {
   CheckCircle2, 
   AlertCircle, 
   Sparkles,
-  Compass
+  Compass,
+  ArrowRight,
+  ShieldCheck
 } from "lucide-react";
 import { YEAR_OPTIONS, BRANCH_OPTIONS } from "../config/constants";
 import { validateRegistration } from "../services/googleSheets";
-import TearToSubmit from "./TearToSubmit";
 import ScrollReveal from "./ScrollReveal";
 
 export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
@@ -83,7 +84,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     }));
   };
 
-  const validateFormBeforeTear = () => {
+  const validateForm = () => {
     const validation = validateRegistration(formData);
     setTouched({
       fullName: true,
@@ -95,6 +96,9 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     setErrors(validation.errors);
 
     if (!validation.isValid) {
+      if (typeof window !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(100);
+      }
       setShakeError(true);
       setTimeout(() => setShakeError(false), 450);
 
@@ -108,8 +112,16 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
     return true;
   };
 
-  const handleTearComplete = () => {
-    if (validateFormBeforeTear()) {
+  const handleSubmit = (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    if (isSubmitting) return;
+
+    if (validateForm()) {
+      if (typeof window !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(50);
+      }
       onSubmit(formData);
     }
   };
@@ -192,7 +204,7 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
           </div>
 
           {/* CHEQUE FORM FIELDS */}
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-7 sm:gap-8 mb-6" noValidate>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-7 sm:gap-8 mb-6" noValidate>
             
             {/* FIELD 1: FULL NAME */}
             <div className="flex flex-col gap-2">
@@ -373,14 +385,61 @@ export function ChequeForm({ onSubmit, isSubmitting, serverError }) {
               )}
             </div>
 
-            {/* TEAR-TO-SUBMIT PERFORATED COMPONENT */}
-            <div className="pt-4">
-              <TearToSubmit
-                isValid={Object.keys(errors).length === 0}
-                isSubmitting={isSubmitting}
-                onValidateBeforeTear={validateFormBeforeTear}
-                onTearComplete={handleTearComplete}
-              />
+            {/* CHEQUE FOOTER & SUBMIT BUTTON */}
+            <div className="pt-6 border-t-2 border-dashed border-[#8B2616]/30 mt-2 flex flex-col gap-6">
+              <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between gap-6">
+                {/* Left Side: Memo Line & Security MICR Code */}
+                <div className="flex flex-col gap-3 max-w-md">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono text-xs font-bold text-[#7B1F13] tracking-widest uppercase shrink-0">
+                      MEMO:
+                    </span>
+                    <span className="font-serif italic text-sm sm:text-base text-[#2C160B] border-b border-[#8B2616]/40 pb-0.5 w-full">
+                      Connectify '26 Registration & Passage
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                    <span className="font-mono text-[11px] sm:text-xs text-[#5C4736]/75 tracking-[0.25em] select-none">
+                      ⑈ 20260922 ⑈ 400013002 ⑆ 113
+                    </span>
+                    <div className="inline-flex items-center gap-1 text-[11px] text-[#7B1F13]/85 font-medium">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#8B2616] shrink-0" />
+                      <span>Somaiya ID Verified Entry</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side: Signature Line & Submit Button */}
+                <div className="flex flex-col items-stretch sm:items-end gap-2.5">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`btn-vintage group relative w-full sm:w-auto px-8 sm:px-12 py-4 rounded-xl text-[#FFF6E5] font-cinzel font-bold text-sm sm:text-base tracking-[0.14em] uppercase transition-all duration-300 flex items-center justify-center gap-3 shadow-xl ${
+                      isSubmitting
+                        ? "opacity-80 cursor-not-allowed"
+                        : "hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-[#E5C368] border-t-transparent rounded-full animate-spin shrink-0" />
+                        <span>PROCESSING CHEQUE...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-5 h-5 text-[#E5C368] shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+                        <span>SUBMIT REGISTRATION</span>
+                        <ArrowRight className="w-5 h-5 text-[#E5C368] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#5C4736]/80 text-center sm:text-right pr-1">
+                    [ AUTHORIZED BEARER ENDORSEMENT ]
+                  </span>
+                </div>
+              </div>
             </div>
           </form>
         </ScrollReveal>
